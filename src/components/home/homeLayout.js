@@ -163,9 +163,6 @@ class homeLayout extends Component {
     
     async function isSpeaking(component) {
       while(component._mounted){
-        //if(!component.props.listening && !window.speechSynthesis.speaking && !component.props.estadoThinking){
-        //  component.props.cambiarEstadoAsistente()
-        //}
         if(window.speechSynthesis.speaking){
           component.props.abortListening()
           component.props.cambiarEstadoSpeaking()
