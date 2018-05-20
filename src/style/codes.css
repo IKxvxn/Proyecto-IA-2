@@ -1,0 +1,13 @@
+
+.codeFormat{
+    background-color: #001529; 
+    color: white;
+    margin: 0.1rem 0.1rem;
+    height: 1.2rem;
+    font-weight: 650;
+    font-size: 0.7rem;
+    line-height: 1.2rem;
+    border-radius: 1.5625rem;
+    text-align: center;
+    width: 3.2rem;
+}

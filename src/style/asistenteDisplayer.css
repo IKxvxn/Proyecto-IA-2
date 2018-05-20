@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.on {
+  background: linear-gradient(90deg, #334454,#149210, #334454);
+	background-size: 400% 400%;
+	animation: Gradient 8s ease infinite;
+}
+
+.off {
+	background: #334454;
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 0%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
