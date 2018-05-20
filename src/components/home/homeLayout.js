@@ -163,6 +163,9 @@ class homeLayout extends Component {
     
     async function isSpeaking(component) {
       while(component._mounted){
+        //if(!component.props.listening && !window.speechSynthesis.speaking && !component.props.estadoThinking){
+        //  component.props.cambiarEstadoAsistente()
+        //}
         if(window.speechSynthesis.speaking){
           component.props.abortListening()
           component.props.cambiarEstadoSpeaking()
@@ -173,20 +176,23 @@ class homeLayout extends Component {
           component.props.estadoAsistente===true ? component.props.startListening() : false
           var transcripCopy = component.props.transcript
           while(!window.speechSynthesis.speaking){
-            await sleep(800);
+            await sleep(500);
             if(!component.props.estadoAsistente){await sleep(250);}
             else if (transcripCopy===component.props.transcript && transcripCopy!==""){
-              component.props.stopListening()
+              component.props.abortListening()
               component.props.cambiarEstadoThinking()
               
               await sleep(1000);
               procesarSpeech(transcripCopy.toLowerCase(),component)
               
-              component.props.cambiarEstadoThinking()
               component.props.resetTranscript()
-
+              component.props.cambiarEstadoThinking()
+              
               if(window.speechSynthesis.speaking){break}
               component.props.startListening()
+            }
+            else if(!component.props.estadoThinking && !window.speechSynthesis.speaking && component.props.estadoAsistente && !component.props.listening){
+              component.props.cambiarEstadoAsistente()
             }
             else{
               transcripCopy = component.props.transcript
