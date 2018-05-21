@@ -10,6 +10,7 @@ import AsistenteDisplayer from './asistenteDisplayer'
 import * as Speech from '../asistente/asistenteSpeech'
 import * as Recognition from '../asistente/asistenteRecognition'
 import * as asistenteActions from '../asistente/asistenteActions'
+import * as agentesActions from '../agentes/agentesActions'
 import * as Style from '../../style/styleHomeLayout';
 
 import '../../style/codes.css'
@@ -153,7 +154,8 @@ class homeLayout extends Component {
       return {
         cambiarEstadoSpeaking: ()  => dispatch(asistenteActions.cambiarEstadoSpeaking()),
         cambiarEstadoThinking: ()  => dispatch(asistenteActions.cambiarEstadoThinking()),
-        cambiarEstadoAsistente: ()  => dispatch(asistenteActions.cambiarEstadoAsistente())
+        cambiarEstadoAsistente: ()  => dispatch(asistenteActions.cambiarEstadoAsistente()),
+        cargarAgentes: ()  => dispatch(agentesActions.cargarAgentes()),
       }
     }
     
@@ -219,11 +221,27 @@ class homeLayout extends Component {
         component.toggle(false)
         return
       }
+      else if (Recognition.containsAny(transcript,Recognition.cargarEntities)!==null && Recognition.containsAny(transcript,Recognition.datosEntities)!==null){
+        switch(window.location.pathname) {
+          case "/Agentes":
+              component.props.cargarAgentes()
+              break;
+          case "/Ordenes":
+            break;
+          case "/Distribucion":
+            break;  
+          default:
+            Speech.Speech(Speech.wrongContext)
+              
+        }
+        
+        return
+      }
       else if (Recognition.containsAny(transcript,Recognition.nameEntities)!==null){
         Speech.Speech(Speech.name)
         return
       }
-      
+
       Speech.Speech(Speech.NotFount)
       
     }

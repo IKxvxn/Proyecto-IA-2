@@ -1,4 +1,4 @@
-import * as Acciones from './actions'
+import * as Acciones from '../../assets/actions'
 
 export const cambiarEstadoAsistente = () => ({
     type: Acciones.CHANGE_ASISTENTE_STATE

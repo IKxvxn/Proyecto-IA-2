@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Icon, Row, Col } from 'antd';
 import SubList from "./distribucionSubList"
+import SearchBar from "../home/generalSearchBar"
 import * as Codes from '../../assets/codes'
 import * as Generador from "../../assets/generator"
 
@@ -36,9 +37,12 @@ class distribucionLayout extends Component {
   
 render() {
     return (
-      <Table  columns={columns} dataSource={data} size="small"  pagination={false} scroll={{ x: '900px',y:"70vh"}}
-        expandedRowRender={record => <SubList ordenes={record.ordenes}/>}
-      />
+      <div>
+        <SearchBar modo={1} />
+        <Table  columns={columns} dataSource={data} size="small"  pagination={false} scroll={{ x: '900px',y:"70vh"}}
+          expandedRowRender={record => <SubList ordenes={record.ordenes}/>}
+        />
+      </div>
     );
   }
 }

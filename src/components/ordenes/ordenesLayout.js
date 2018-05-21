@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Table , Icon, Col, Row} from 'antd';
+import SearchBar from "../home/generalSearchBar"
 import * as Generador from "../../assets/generator"
 
 const columns = [{
@@ -22,6 +23,7 @@ class ordenesLayout extends Component {
   render() {
     return (
       <div>
+        <SearchBar modo={0}/>
         <Table columns={columns} dataSource={data} size="small"  pagination={false} scroll={{ x: '900px',y:"70vh"}}/>
       </div>
     );

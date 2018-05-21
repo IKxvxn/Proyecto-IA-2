@@ -1,7 +1,9 @@
-export const Init = "Ahora podré ayudarte en lo que necesites"
+export const Init = "Ahora podré ayudarte, puedes utilizar el comando ayuda en cualquier momento"
 export const End = "Adiós, fue un placer"
-export const NotFount = "No te entendí, prueba diciendo AYUDA"
+export const NotFount = "No te he entendido"
 export const name = "Me llamo asistente, mucho gusto"
+export const cargarSucess = "Información cargada satisfactoriamente"
+export const wrongContext = "Comando inválido en este contexto"
 
 var sayTimeout = null;
 

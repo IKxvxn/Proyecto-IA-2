@@ -1,4 +1,4 @@
-import * as Acciones from './actions'
+import * as Acciones from '../../assets/actions'
 import * as Speech from './asistenteSpeech'
 
 
@@ -31,6 +31,8 @@ const asistenteReducer = (state = DEFAULT_STATE, action) => {
                 ...state,
                 thinking: !state.thinking,
             }
+        case Acciones.CARGAR_AGENTES_SUCCESS:
+            if(state.activo===true){Speech.Speech(Speech.cargarSucess)}
         default:
             return state
     }
