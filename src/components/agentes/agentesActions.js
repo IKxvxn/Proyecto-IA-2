@@ -12,3 +12,8 @@ export function cargarAgentes(){
         })
     }
 }
+
+export const actualizarFiltro = (filtro) => ({
+    type: Acciones.CHANGE_FILTRO_AGENTES,
+    data: filtro
+})

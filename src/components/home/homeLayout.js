@@ -146,7 +146,7 @@ class homeLayout extends Component {
       return {
         estadoSpeaking: state.asistenteReducer.speaking,
         estadoThinking: state.asistenteReducer.thinking,
-        estadoAsistente: state.asistenteReducer.activo
+        estadoAsistente: state.asistenteReducer.estadoAsistente
       }
     }
     
@@ -156,6 +156,7 @@ class homeLayout extends Component {
         cambiarEstadoThinking: ()  => dispatch(asistenteActions.cambiarEstadoThinking()),
         cambiarEstadoAsistente: ()  => dispatch(asistenteActions.cambiarEstadoAsistente()),
         cargarAgentes: ()  => dispatch(agentesActions.cargarAgentes()),
+        actualizarFiltroAgente: (filtro)  => dispatch(agentesActions.actualizarFiltro(filtro)),
       }
     }
     
@@ -234,7 +235,22 @@ class homeLayout extends Component {
             Speech.Speech(Speech.wrongContext)
               
         }
+        return
+      }
+      else if (Recognition.containsAny(transcript,Recognition.buscarEntities)!==null){
+        const keyword = Recognition.containsAny(transcript,Recognition.buscarEntities)
         
+        switch(window.location.pathname) {
+          case "/Agentes":
+              component.props.actualizarFiltroAgente(transcript.replace(keyword,''))
+              break;
+          case "/Ordenes":
+            break;
+          case "/Distribucion":
+            break;  
+          default:
+            Speech.Speech(Speech.wrongContext)
+        }
         return
       }
       else if (Recognition.containsAny(transcript,Recognition.nameEntities)!==null){

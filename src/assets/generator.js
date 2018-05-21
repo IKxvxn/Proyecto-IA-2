@@ -7,7 +7,7 @@ const nombres=["Mateo","Santiago","Matías","Sebastián","Benjamín","Lucas","Th
 "Noah","León","Vicente","Ángel","Rodrigo","Benicio","Íker","Luciano","Sofía","Isabella","Emma",
 "Valentina","Victoria","Martina","Luciana","Camila","Lucía","Renata","Mía","Ximena","Valeria","Emilia",
 "Olivia","Julieta","Elena","Sara","Catalina","Regina","Daniela","Samantha","Paula","Alma","Natalia",
-"Mariana","MaríaJosé","Antonella","María","Emily","Julia","Zoe","Ariana","Romina","Gabriela",
+"Mariana","María José","Antonella","María","Emily","Julia","Zoe","Ariana","Romina","Gabriela",
 "Juana","Amanda","Abril","Aitana","Josefina","Abigail","Miranda","Antonia","Andrea","Fernanda","Chloe",
 "Amelia","Alejandra","Lola","Francesca"]
 

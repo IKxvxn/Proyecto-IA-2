@@ -4,6 +4,7 @@ export const NotFount = "No te he entendido"
 export const name = "Me llamo asistente, mucho gusto"
 export const cargarSucess = "Información cargada satisfactoriamente"
 export const wrongContext = "Comando inválido en este contexto"
+export const allwaysUp = "La funcionalidad no se puede desactivar porque está siendo utilizada por el asistente"
 
 var sayTimeout = null;
 

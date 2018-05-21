@@ -3,29 +3,24 @@ import { connect } from 'react-redux'
 import { Table, Icon, Row, Col } from 'antd';
 import SearchBar from "../home/generalSearchBar"
 import * as agentesActions from './agentesActions'
+import * as Columnas from '../../assets/tables'
 
-const columns = [{
-  title: 'ID',
-  dataIndex: 'id',
-  width: "18rem",
-}, {
-  title: 'Agente',
-  dataIndex: 'name',
-}, {
-  title: 'Códigos',
-  dataIndex: 'codes',
-  width: "21.5625rem",
-  render: array => <Row type="flex" justify="start">{array.map(function(text){return <Col span={1} className={"codeFormat"}><Icon style={{fontWeight:200}}type={text[0]==="R"?"tool":"setting"} /> {text}</Col>})}</Row>,
+var JsSearch = require('js-search');
+var busqueda = new JsSearch.Search('key');
+busqueda.indexStrategy = new JsSearch.AllSubstringsIndexStrategy();
 
-}];
+busqueda.addIndex('codes');
+busqueda.addIndex('id');
+busqueda.addIndex('name');
 
 class agentesLayout extends Component {
   
   render() {
+    busqueda.addDocuments(this.props.estadoAgentes.data)
     return (
       <div>
-        <SearchBar modo={0} handleButtonAction={this.props.cargarAgentes}/>
-        <Table  columns={columns} loading={this.props.estadoAgentes.loading} dataSource={this.props.estadoAgentes.data} size="small"  pagination={false} scroll={{ x: '900px',y:"70vh"}}/>
+        <SearchBar modo={0} actualizarFiltro={this.props.actualizarFiltro} value={this.props.estadoAgentes.filtro} handleButtonAction={this.props.cargarAgentes}/>
+        <Table  columns={Columnas.agenteColumns} loading={this.props.estadoAgentes.loading} dataSource={this.props.estadoAgentes.filtro===""?this.props.estadoAgentes.data:busqueda.search(this.props.estadoAgentes.filtro)} size="small"  pagination={false} scroll={{ x: '900px',y:"70vh"}}/>
       </div>
     );
   }
@@ -40,6 +35,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     cargarAgentes: ()  => dispatch(agentesActions.cargarAgentes()),
+    actualizarFiltro: (filtro)  => dispatch(agentesActions.actualizarFiltro(filtro)),
   }
 }
 

@@ -36,12 +36,12 @@ class asistenteLayout extends Component {
         <Col> 
           <Card
             hoverable
-            onClick={() => this.setState({notificaciones:!this.state.notificaciones})}
+            onClick={() => this.props.cambiarEstadoNotificaciones()}
             style={{ width: "13rem" }}
             cover={<img alt="Imagen de Notificaciones" src={Mensajes} />}
           >
             <Meta
-              title={<Row><Col span={20}>Notificaciones</Col><Col span={4}><Rate style={{color:"#1890ff"}} count={1} disabled value={this.state.notificaciones?1:0} character={<Icon type={this.state.notificaciones?"check-circle":"close-circle"}/>}  /></Col></Row>}
+              title={<Row><Col span={20}>Notificaciones</Col><Col span={4}><Rate style={{color:"#1890ff"}} count={1} disabled value={this.props.estadoNotificaciones||this.props.estadoAsistente?1:0} character={<Icon type={this.props.estadoNotificaciones||this.props.estadoAsistente?"check-circle":"close-circle"}/>}  /></Col></Row>}
               description="Informa sobre sucesos"
             />
           </Card>
@@ -54,7 +54,7 @@ class asistenteLayout extends Component {
             cover={<img alt="Imagen de Ayuda" src={Ayuda} />}
           >
             <Meta
-              title={<Row><Col span={20}>Información</Col><Col span={4}><Rate style={{color:"#1890ff"}} count={1} disabled value={this.state.ayuda?1:0} character={<Icon type={this.state.ayuda?"check-circle":"close-circle"}/>}  /></Col></Row>}
+              title={<Row><Col span={20}>Información</Col><Col span={4}><Rate style={{color:"#1890ff"}} count={1} disabled value={this.state.ayuda||this.props.estadoAsistente?1:0} character={<Icon type={this.state.ayuda||this.props.estadoAsistente?"check-circle":"close-circle"}/>}  /></Col></Row>}
               description="Ayuda según contexto"
             />
           </Card>
@@ -66,13 +66,15 @@ class asistenteLayout extends Component {
 
 function mapStateToProps(state) {
   return {
-    estadoAsistente: state.asistenteReducer.activo,
+    estadoAsistente: state.asistenteReducer.estadoAsistente,
+    estadoNotificaciones: state.asistenteReducer.estadoNotificaciones,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     cambiarEstadoAsistente: ()  => dispatch(asistenteActions.cambiarEstadoAsistente()),
+    cambiarEstadoNotificaciones: ()  => dispatch(asistenteActions.cambiarEstadoNotificaciones()),
   }
 }
 

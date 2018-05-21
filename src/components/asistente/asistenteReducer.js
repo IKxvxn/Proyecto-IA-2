@@ -1,9 +1,16 @@
+import { message } from 'antd';
 import * as Acciones from '../../assets/actions'
 import * as Speech from './asistenteSpeech'
 
+message.config({
+    top: 10,
+    maxCount: 1,
+  })
 
 const DEFAULT_STATE = {
-    activo:false,
+    estadoAsistente:false,
+    estadoNotificaciones:false,
+    estadoAyuda:false,
     speaking:true,
     thinking:false,
 }
@@ -11,7 +18,7 @@ const DEFAULT_STATE = {
 const asistenteReducer = (state = DEFAULT_STATE, action) => {
     switch (action.type) {
         case Acciones.CHANGE_ASISTENTE_STATE:
-            if (!state.activo){
+            if (!state.estadoAsistente){
                 Speech.Speech(Speech.Init)
             }
             else{
@@ -19,7 +26,7 @@ const asistenteReducer = (state = DEFAULT_STATE, action) => {
             }
             return {
                 ...state,
-                activo: !state.activo,
+                estadoAsistente: !state.estadoAsistente,
             }
         case Acciones.CHANGE_SPEAKING_STATE:
             return {
@@ -31,8 +38,21 @@ const asistenteReducer = (state = DEFAULT_STATE, action) => {
                 ...state,
                 thinking: !state.thinking,
             }
+        case Acciones,Acciones.CHANGE_NOTIFICACIONES_STATE:
+            if (state.estadoAsistente===true){
+                Speech.Speech(Speech.allwaysUp)
+            }
+            else{
+                return {
+                    ...state,
+                    estadoNotificaciones: !state.estadoNotificaciones,
+                }  
+            }
+            return state 
         case Acciones.CARGAR_AGENTES_SUCCESS:
-            if(state.activo===true){Speech.Speech(Speech.cargarSucess)}
+            if(state.estadoAsistente===true){Speech.Speech(Speech.cargarSucess)}
+            else if(state.estadoNotificaciones===true){message.success(Speech.cargarSucess)}
+            return state
         default:
             return state
     }

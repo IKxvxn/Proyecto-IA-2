@@ -2,7 +2,10 @@ import * as Acciones from '../../assets/actions'
 
 const DEFAULT_STATE = {
     data:[],
-    loading:false
+    dataFiltrada:[],
+    filtro:"",
+    loading:false,
+
 }
 
 const agentesReducer = (state = DEFAULT_STATE, action) => {
@@ -23,6 +26,11 @@ const agentesReducer = (state = DEFAULT_STATE, action) => {
                 ...state,
                 loading: false,
                 data: [],
+            }
+        case Acciones.CHANGE_FILTRO_AGENTES:
+            return {
+                ...state,
+                filtro: action.data,
             }
         default:
             return state
