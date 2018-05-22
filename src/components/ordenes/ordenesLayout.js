@@ -1,33 +1,53 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import { Table , Icon, Col, Row} from 'antd';
 import SearchBar from "../home/generalSearchBar"
+import * as ordenesActions from './ordenesActions'
 import * as Generador from "../../assets/generator"
+import * as Columnas from '../../assets/tables'
 
-const columns = [{
-  title: 'ID',
-  dataIndex: 'id',
-  width: "18rem",
-}, {
-  title: 'Cliente',
-  dataIndex: 'name',
-}, {
-  title: 'Código',
-  dataIndex: 'code',
-  width: "5rem",
-  render: text => <Row type="flex" justify="start"><Col className={"codeFormat"}><Icon style={{fontWeight:200}}type={text[0]==="R"?"tool":"setting"} /> {text}</Col></Row>,
-}];
+var JsSearch = require('js-search');
+var busqueda = new JsSearch.Search('key');
+busqueda.indexStrategy = new JsSearch.AllSubstringsIndexStrategy();
 
-const data = Generador.generarOrdenes(100)
+busqueda.addIndex('code');
+busqueda.addIndex('id');
+busqueda.addIndex('name');
 
 class ordenesLayout extends Component {
   render() {
+    busqueda.addDocuments(this.props.estadoOrdenes.data)
     return (
       <div>
-        <SearchBar modo={0}/>
-        <Table columns={columns} dataSource={data} size="small"  pagination={false} scroll={{ x: '900px',y:"70vh"}}/>
+        <SearchBar modo={0} actualizarFiltro={this.props.actualizarFiltro} loading={this.props.estadoOrdenes.loading} value={this.props.estadoOrdenes.filtro} handleButtonAction={this.props.cargarOrdenes}/>
+        <Table 
+          style={{marginBottom:"-2rem"}} 
+          columns={Columnas.ordenesColumns} 
+          loading={this.props.estadoOrdenes.loading} 
+          dataSource={this.props.estadoOrdenes.filtro===""?this.props.estadoOrdenes.data:busqueda.search(this.props.estadoOrdenes.filtro)}
+          pagination={{ pageSize: 25, current:this.props.estadoOrdenes.currentPage, onChange:(page)=>this.props.actualizarPage(page) }}  
+          scroll={{ x: '900px',y:"66.5vh"}}
+          size="small" 
+        />
       </div>
     );
   }
 }
 
-export default ordenesLayout;
+function mapStateToProps(state) {
+  return {
+    estadoOrdenes: state.ordenesReducer,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    cargarOrdenes: ()  => dispatch(ordenesActions.cargarOrdenes()),
+    actualizarFiltro: (filtro)  => dispatch(ordenesActions.actualizarFiltro(filtro)),
+    actualizarPage: (page)  => dispatch(ordenesActions.actualizarPage(page)),
+  }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(ordenesLayout)
+

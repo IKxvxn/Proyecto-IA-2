@@ -4,6 +4,7 @@ import ReduxThunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import asistenteReducer from './components/asistente/asistenteReducer'
 import agentesReducer from './components/agentes/agentesReducer'
+import ordenesReducer from './components/ordenes/ordenesReducer'
 
 
 const logger = createLogger({
@@ -12,7 +13,7 @@ const logger = createLogger({
   diff: true,
 })
 
-const Store = createStore(combineReducers({asistenteReducer:asistenteReducer, agentesReducer:agentesReducer}),
+const Store = createStore(combineReducers({asistenteReducer:asistenteReducer, agentesReducer:agentesReducer, ordenesReducer:ordenesReducer}),
 composeWithDevTools(
   applyMiddleware(
     ReduxThunk,

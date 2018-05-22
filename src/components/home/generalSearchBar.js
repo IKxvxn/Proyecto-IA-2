@@ -20,7 +20,7 @@ class NormalLoginForm extends React.Component {
           {getFieldDecorator('userName')(
             <Row type="flex" justify="space-around">
               <Col xs={24} md={19}><Input value={this.props.value} onChange={(target)=>this.props.actualizarFiltro(target.target.value)} prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)'}} />} placeholder="Criterio de búsqueda" /></Col>
-              <Col xs={24} md={5}><Button type="primary" onClick={this.props.handleButtonAction} style={{width:"100%"}}><Icon type={this.props.modo===1?"pie-chart":"profile"} />{this.props.modo===1?"Distribuir":"Cargar"}</Button></Col>
+              <Col xs={24} md={5}><Button type="primary" loading={this.props.loading} onClick={this.props.handleButtonAction} style={{width:"100%"}}><Icon type={this.props.modo===1?"pie-chart":"profile"} />{this.props.modo===1?"Distribuir":"Cargar"}</Button></Col>
             </Row>
           )}
         </FormItem>

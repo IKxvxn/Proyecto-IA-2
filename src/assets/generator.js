@@ -24,7 +24,7 @@ const apellidos=["González","Muñoz","Rojas","Díaz","Pérez","Soto","Contreras
 
 var codes = Object.keys(servicios.servicios)
 
-function getRandomArbitrary(min, max) {
+export function getRandomArbitrary(min, max) {
     return  Math.floor(Math.random() * (max - min) + min);
 }
 

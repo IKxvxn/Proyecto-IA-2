@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import * as Acciones from '../../assets/actions'
-import * as Speech from './asistenteSpeech'
+import * as Speech from '../../assets/speech'
 
 message.config({
     top: 10,
@@ -38,7 +38,7 @@ const asistenteReducer = (state = DEFAULT_STATE, action) => {
                 ...state,
                 thinking: !state.thinking,
             }
-        case Acciones,Acciones.CHANGE_NOTIFICACIONES_STATE:
+        case Acciones.CHANGE_NOTIFICACIONES_STATE:
             if (state.estadoAsistente===true){
                 Speech.Speech(Speech.allwaysUp)
             }
@@ -49,9 +49,10 @@ const asistenteReducer = (state = DEFAULT_STATE, action) => {
                 }  
             }
             return state 
+        case Acciones.CARGAR_ORDENES_SUCCESS:    
         case Acciones.CARGAR_AGENTES_SUCCESS:
             if(state.estadoAsistente===true){Speech.Speech(Speech.cargarSucess)}
-            else if(state.estadoNotificaciones===true){message.success(Speech.cargarSucess)}
+            else if(state.estadoNotificaciones===true){message.success(Speech.cargarSucess[0])}
             return state
         default:
             return state

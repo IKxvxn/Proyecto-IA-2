@@ -7,10 +7,11 @@ import Ordenes from '../ordenes/ordenesLayout'
 import Distribucion from '../distribucion/distribucionLayout'
 import Asistente from '../asistente/asistenteLayout'
 import AsistenteDisplayer from './asistenteDisplayer'
-import * as Speech from '../asistente/asistenteSpeech'
-import * as Recognition from '../asistente/asistenteRecognition'
+import * as Speech from '../../assets/speech'
+import * as Recognition from '../../assets/recognition'
 import * as asistenteActions from '../asistente/asistenteActions'
 import * as agentesActions from '../agentes/agentesActions'
+import * as ordenesActions from '../ordenes/ordenesActions'
 import * as Style from '../../style/styleHomeLayout';
 
 import '../../style/codes.css'
@@ -37,15 +38,15 @@ class homeLayout extends Component {
 
       changeLocation = (name) =>{
         switch (name){
-          case Recognition.locations[2]:
+          case Recognition.locationsNouns[2]:
             this.props.history.push("/Ordenes")
             this.setState({tab:'2'})
             break
-          case Recognition.locations[3]:
+          case Recognition.locationsNouns[3]:
             this.props.history.push("/Distribucion")
             this.setState({tab:'3'})
             break
-          case Recognition.locations[4]:
+          case Recognition.locationsNouns[4]:
             this.props.history.push("/Asistente")
             this.setState({tab:'4'})
             break
@@ -157,6 +158,9 @@ class homeLayout extends Component {
         cambiarEstadoAsistente: ()  => dispatch(asistenteActions.cambiarEstadoAsistente()),
         cargarAgentes: ()  => dispatch(agentesActions.cargarAgentes()),
         actualizarFiltroAgente: (filtro)  => dispatch(agentesActions.actualizarFiltro(filtro)),
+        cargarOrdenes: ()  => dispatch(ordenesActions.cargarOrdenes()),
+        actualizarFiltroOrdenes: (filtro)  => dispatch(ordenesActions.actualizarFiltro(filtro)),
+        actualizarPageOrdenes: (page)  => dispatch(ordenesActions.actualizarPage(page)),
       }
     }
     
@@ -192,7 +196,7 @@ class homeLayout extends Component {
               component.props.startListening()
             }
             else if(!component.props.estadoThinking && !window.speechSynthesis.speaking && component.props.estadoAsistente && !component.props.listening){
-              component.props.cambiarEstadoAsistente()
+              component.props.startListening()
             }
             else{
               transcripCopy = component.props.transcript
@@ -203,31 +207,89 @@ class homeLayout extends Component {
     }
 
     function procesarSpeech(transcript,component){
-      if (Recognition.containsAny(transcript,Recognition.apagarEntities)!==null && Recognition.containsAny(transcript,Recognition.asistente)!==null){
+      if (Recognition.containsAny(transcript,Recognition.apagarVerbs)!==null && Recognition.containsAny(transcript,Recognition.asistenteNouns)!==null){
         component.props.cambiarEstadoAsistente()
         return
       }
-      else if (Recognition.containsAny(transcript,Recognition.irEntities)!==null){
-        var location = Recognition.containsAny(transcript,Recognition.locations)
-        if (location!==null){
-          component.changeLocation(location)
+      else if (Recognition.containsAny(transcript,Recognition.buscarVerbs)!==null){
+        const keyword = Recognition.containsAny(transcript,Recognition.buscarVerbs)
+        
+        switch(window.location.pathname) {
+          case "/Agentes":
+            component.props.actualizarFiltroAgente(transcript.replace(keyword,''))
+            Speech.Speech(Speech.oK)
+            break;
+          case "/Ordenes":
+            component.props.actualizarFiltroOrdenes(transcript.replace(keyword,''))
+            Speech.Speech(Speech.oK)
+            break;
+          case "/Distribucion":
+            break;  
+          default:
+            Speech.Speech(Speech.wrongContext)
+        }
+        return
+      }
+      else if (Recognition.containsAny(transcript,Recognition.busquedaNouns)!==null&&Recognition.containsAny(transcript,Recognition.limpiarVerbs)!==null){
+        switch(window.location.pathname) {
+          case "/Agentes":
+            component.props.actualizarFiltroAgente("")
+            Speech.Speech(Speech.oK)
+            break;
+          case "/Ordenes":
+            component.props.actualizarFiltroOrdenes("")
+            Speech.Speech(Speech.oK)
+            break;
+          case "/Distribucion":
+            break;  
+          default:
+            Speech.Speech(Speech.wrongContext)
+        }
+        return
+      }
+      else if (Recognition.containsAny(transcript,Recognition.irVerbs)!==null && Recognition.containsAny(transcript,Recognition.pageNouns)!==null){
+        var page = Recognition.getFirstNumber(transcript)
+        if(page!==undefined){
+
+          switch(window.location.pathname) {
+            case "/Agentes":
+              break;
+            case "/Ordenes":
+              component.props.actualizarPageOrdenes(page)
+              break;
+            case "/Distribucion":
+              break;  
+            default:
+              Speech.Speech(Speech.wrongContext)
+          }
           return
         }
       }
-      else if (Recognition.containsAny(transcript,Recognition.colapsar)!==null && Recognition.containsAny(transcript,Recognition.menu)!==null){
+      else if (Recognition.containsAny(transcript,Recognition.irVerbs)!==null){
+        var location = Recognition.containsAny(transcript,Recognition.locationsNouns)
+        if (location!==null){
+          component.changeLocation(location)
+          Speech.Speech(Speech.oK)
+          return
+        }
+      }
+      else if (Recognition.containsAny(transcript,Recognition.colapsarVerbs)!==null && Recognition.containsAny(transcript,Recognition.menuNouns)!==null){
         component.toggle(true)
+        Speech.Speech(Speech.oK)
         return
       }
-      else if (Recognition.containsAny(transcript,Recognition.expandir)!==null && Recognition.containsAny(transcript,Recognition.menu)!==null){
+      else if (Recognition.containsAny(transcript,Recognition.expandirVerbs)!==null && Recognition.containsAny(transcript,Recognition.menuNouns)!==null){
         component.toggle(false)
+        Speech.Speech(Speech.oK)
         return
       }
-      else if (Recognition.containsAny(transcript,Recognition.cargarEntities)!==null && Recognition.containsAny(transcript,Recognition.datosEntities)!==null){
+      else if (Recognition.containsAny(transcript,Recognition.cargarVerbs)!==null && Recognition.containsAny(transcript,Recognition.datosVerbs)!==null){
         switch(window.location.pathname) {
           case "/Agentes":
               component.props.cargarAgentes()
               break;
           case "/Ordenes":
+            component.props.cargarOrdenes()
             break;
           case "/Distribucion":
             break;  
@@ -237,23 +299,7 @@ class homeLayout extends Component {
         }
         return
       }
-      else if (Recognition.containsAny(transcript,Recognition.buscarEntities)!==null){
-        const keyword = Recognition.containsAny(transcript,Recognition.buscarEntities)
-        
-        switch(window.location.pathname) {
-          case "/Agentes":
-              component.props.actualizarFiltroAgente(transcript.replace(keyword,''))
-              break;
-          case "/Ordenes":
-            break;
-          case "/Distribucion":
-            break;  
-          default:
-            Speech.Speech(Speech.wrongContext)
-        }
-        return
-      }
-      else if (Recognition.containsAny(transcript,Recognition.nameEntities)!==null){
+      else if (Recognition.containsAny(transcript,Recognition.nameQuestions)!==null){
         Speech.Speech(Speech.name)
         return
       }

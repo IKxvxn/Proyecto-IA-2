@@ -2,7 +2,6 @@ import * as Acciones from '../../assets/actions'
 
 const DEFAULT_STATE = {
     data:[],
-    dataFiltrada:[],
     filtro:"",
     loading:false,
 
