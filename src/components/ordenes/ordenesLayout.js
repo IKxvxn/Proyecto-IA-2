@@ -19,13 +19,18 @@ class ordenesLayout extends Component {
     busqueda.addDocuments(this.props.estadoOrdenes.data)
     return (
       <div>
-        <SearchBar modo={0} actualizarFiltro={this.props.actualizarFiltro} loading={this.props.estadoOrdenes.loading} value={this.props.estadoOrdenes.filtro} handleButtonAction={this.props.cargarOrdenes}/>
+        <SearchBar 
+          modo={0} 
+          actualizarFiltro={this.props.actualizarFiltro} 
+          loading={this.props.estadoOrdenes.loading} 
+          value={this.props.estadoOrdenes.filtro} 
+          handleButtonAction={this.props.cargarOrdenes}/>
         <Table 
           style={{marginBottom:"-2rem"}} 
           columns={Columnas.ordenesColumns} 
           loading={this.props.estadoOrdenes.loading} 
           dataSource={this.props.estadoOrdenes.filtro===""?this.props.estadoOrdenes.data:busqueda.search(this.props.estadoOrdenes.filtro)}
-          pagination={{ pageSize: 25, current:this.props.estadoOrdenes.currentPage, onChange:(page)=>this.props.actualizarPage(page) }}  
+          pagination={{ pageSize: this.props.estadoOrdenes.pageSize, current:this.props.estadoOrdenes.currentPage, onChange:(page)=>this.props.actualizarPage(page) }}  
           scroll={{ x: '900px',y:"66.5vh"}}
           size="small" 
         />

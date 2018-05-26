@@ -20,3 +20,16 @@ export const cambiarEstadoSpeaking = () => ({
 export const cambiarEstadoThinking = () => ({
     type: Acciones.CHANGE_THINKING_STATE
 })
+
+export const showAyudaModal = () => ({
+    type: Acciones.SHOW_AYUDA_MODAL
+})
+
+export const hideAyudaModal = () => ({
+    type: Acciones.HIDE_AYUDA_MODAL
+})
+
+export const changeAyudaTab = (tab) => ({
+    type: Acciones.CHANGE_AYUDA_TAB,
+    data: tab
+})

@@ -19,7 +19,8 @@ export const actualizarFiltro = (filtro) => ({
     data: filtro
 })
 
-export const actualizarPage = (page) => ({
+export const actualizarPage = (page,dispatcher) => ({
     type: Acciones.CHANGE_PAGE_ORDENES,
-    data: page
+    data: page,
+    dispatcher: dispatcher
 })

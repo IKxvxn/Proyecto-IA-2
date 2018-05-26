@@ -7,7 +7,6 @@ const DEFAULT_STATE = {
     loading:false,
     pageSize:25,
     currentPage:1,
-
 }
 
 const ordenesReducer = (state = DEFAULT_STATE, action) => {
@@ -21,6 +20,7 @@ const ordenesReducer = (state = DEFAULT_STATE, action) => {
             return {
                 ...state,
                 loading: false,
+                currentPage:1,
                 data: action.data,
             }
         case Acciones.CARGAR_ORDENES_FAILURE:
@@ -36,7 +36,7 @@ const ordenesReducer = (state = DEFAULT_STATE, action) => {
             }
         case Acciones.CHANGE_PAGE_ORDENES:
             if(action.data<=state.data.length/state.pageSize && action.data>0){
-                Speech.Speech(Speech.oK)
+                if(action.dispatcher){Speech.Speech(Speech.oK)}
                 return{
                     ...state,
                     currentPage: action.data,

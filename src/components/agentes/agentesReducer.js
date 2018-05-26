@@ -1,10 +1,12 @@
 import * as Acciones from '../../assets/actions'
+import * as Speech from '../../assets/speech'
 
 const DEFAULT_STATE = {
     data:[],
     filtro:"",
     loading:false,
-
+    pageSize:25,
+    currentPage:1,
 }
 
 const agentesReducer = (state = DEFAULT_STATE, action) => {
@@ -31,6 +33,16 @@ const agentesReducer = (state = DEFAULT_STATE, action) => {
                 ...state,
                 filtro: action.data,
             }
+        case Acciones.CHANGE_PAGE_AGENTES:
+            if(action.data<=state.data.length/state.pageSize && action.data>0){
+                if(action.dispatcher){Speech.Speech(Speech.oK)}
+                return{
+                    ...state,
+                    currentPage: action.data,
+                }
+            }
+            Speech.Speech(Speech.wrongIndex)
+            return state
         default:
             return state
     }

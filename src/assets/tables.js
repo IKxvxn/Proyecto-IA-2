@@ -53,3 +53,17 @@ export const ordenesColumns = [{
     width: "8rem",
     render: ordenes => <Row type="flex" justify="start">{"$"+Codes.calcularComision(ordenes)}</Row>
   }]
+
+  export const ayudaNormalColumns = [{
+    title: '',
+    dataIndex: 'objeto',
+    width: "1.5rem"
+  }, {
+    title: '',
+    dataIndex: 'descripcion',
+  }];
+
+  export const ayudaSingleColumns = [{
+    title: '',
+    dataIndex: 'descripcion',
+  }];

@@ -13,6 +13,8 @@ const DEFAULT_STATE = {
     estadoAyuda:false,
     speaking:true,
     thinking:false,
+    estadoAyudaModal:false,
+    currentTabAyuda:"simbología",
 }
 
 const asistenteReducer = (state = DEFAULT_STATE, action) => {
@@ -37,6 +39,22 @@ const asistenteReducer = (state = DEFAULT_STATE, action) => {
             return {
                 ...state,
                 thinking: !state.thinking,
+            }
+        case Acciones.SHOW_AYUDA_MODAL:
+            return{
+                ...state,
+                estadoAyudaModal:true
+            }
+        case Acciones.HIDE_AYUDA_MODAL:
+            return{
+                ...state,
+                estadoAyudaModal:false
+            }
+        case Acciones.CHANGE_AYUDA_TAB:
+            return{
+                ...state,
+                estadoAyudaModal:true,
+                currentTabAyuda:action.data
             }
         case Acciones.CHANGE_NOTIFICACIONES_STATE:
             if (state.estadoAsistente===true){

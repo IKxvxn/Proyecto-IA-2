@@ -19,8 +19,20 @@ class agentesLayout extends Component {
     busqueda.addDocuments(this.props.estadoAgentes.data)
     return (
       <div>
-        <SearchBar modo={0} actualizarFiltro={this.props.actualizarFiltro} loading={this.props.estadoAgentes.loading} value={this.props.estadoAgentes.filtro} handleButtonAction={this.props.cargarAgentes}/>
-        <Table style={{marginBottom:"-2rem"}} columns={Columnas.agenteColumns} loading={this.props.estadoAgentes.loading} dataSource={this.props.estadoAgentes.filtro===""?this.props.estadoAgentes.data:busqueda.search(this.props.estadoAgentes.filtro)} size="small"  pagination={{ pageSize: 25 }}  scroll={{ x: '900px',y:"66.5vh"}}/>
+        <SearchBar 
+          modo={0} 
+          actualizarFiltro={this.props.actualizarFiltro} 
+          loading={this.props.estadoAgentes.loading} 
+          value={this.props.estadoAgentes.filtro} 
+          handleButtonAction={this.props.cargarAgentes}/>
+        <Table 
+          style={{marginBottom:"-2rem"}} 
+          columns={Columnas.agenteColumns} 
+          loading={this.props.estadoAgentes.loading} 
+          dataSource={this.props.estadoAgentes.filtro===""?this.props.estadoAgentes.data:busqueda.search(this.props.estadoAgentes.filtro)} 
+          size="small"  
+          pagination={{ pageSize: this.props.estadoAgentes.pageSize, current:this.props.estadoAgentes.currentPage, onChange:(page)=>this.props.actualizarPage(page) }}  
+          scroll={{ x: '900px',y:"66.5vh"}}/>
       </div>
     );
   }
@@ -36,6 +48,7 @@ function mapDispatchToProps(dispatch) {
   return {
     cargarAgentes: ()  => dispatch(agentesActions.cargarAgentes()),
     actualizarFiltro: (filtro)  => dispatch(agentesActions.actualizarFiltro(filtro)),
+    actualizarPage: (page)  => dispatch(agentesActions.actualizarPage(page)),
   }
 }
 

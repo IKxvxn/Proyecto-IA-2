@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Row, Col } from 'antd';
 import { connect } from 'react-redux'
 import { Route, Switch, Link, withRouter } from 'react-router-dom'
 import Agentes from '../agentes/agentesLayout'
@@ -7,6 +7,7 @@ import Ordenes from '../ordenes/ordenesLayout'
 import Distribucion from '../distribucion/distribucionLayout'
 import Asistente from '../asistente/asistenteLayout'
 import AsistenteDisplayer from './asistenteDisplayer'
+import Ayuda from '../modals/ayuda'
 import * as Speech from '../../assets/speech'
 import * as Recognition from '../../assets/recognition'
 import * as asistenteActions from '../asistente/asistenteActions'
@@ -94,12 +95,17 @@ class homeLayout extends Component {
             </Sider>
             <Layout>
               <Header style={Style.header}>
-                <Icon
-                  style={Style.trigger}
-                  type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                  onClick={() =>this.toggle(!this.state.collapsed)}
-                />
-                {this.props.transcript}
+                <Row type="flex" justify="space-between">
+                  <Col>
+                    <Icon
+                      style={Style.trigger}
+                      type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                      onClick={() =>this.toggle(!this.state.collapsed)}
+                    />
+                  </Col>
+                  <Col>{this.props.transcript}</Col>
+                  <Col><Ayuda changeAyudaTab={this.props.changeAyudaTab} currentTabAyuda={this.props.currentTabAyuda} estadoAyudaModal={this.props.estadoAyudaModal} showAyudaModal={this.props.showAyudaModal} hideAyudaModal={this.props.hideAyudaModal}/></Col>
+                </Row>
               </Header>
               <Content style={Style.content}>
                 <Switch>
@@ -147,7 +153,11 @@ class homeLayout extends Component {
       return {
         estadoSpeaking: state.asistenteReducer.speaking,
         estadoThinking: state.asistenteReducer.thinking,
-        estadoAsistente: state.asistenteReducer.estadoAsistente
+        estadoAsistente: state.asistenteReducer.estadoAsistente,
+        currentTabAyuda: state.asistenteReducer.currentTabAyuda,
+        estadoAyudaModal: state.asistenteReducer.estadoAyudaModal,
+        currentPageOrdenes: state.ordenesReducer.currentPage,
+        currentPageAgentes: state.agentesReducer.currentPage,
       }
     }
     
@@ -156,11 +166,15 @@ class homeLayout extends Component {
         cambiarEstadoSpeaking: ()  => dispatch(asistenteActions.cambiarEstadoSpeaking()),
         cambiarEstadoThinking: ()  => dispatch(asistenteActions.cambiarEstadoThinking()),
         cambiarEstadoAsistente: ()  => dispatch(asistenteActions.cambiarEstadoAsistente()),
+        hideAyudaModal: ()  => dispatch(asistenteActions.hideAyudaModal()),
+        showAyudaModal: ()  => dispatch(asistenteActions.showAyudaModal()),
+        changeAyudaTab: (tab) => dispatch(asistenteActions.changeAyudaTab(tab)) ,
         cargarAgentes: ()  => dispatch(agentesActions.cargarAgentes()),
         actualizarFiltroAgente: (filtro)  => dispatch(agentesActions.actualizarFiltro(filtro)),
         cargarOrdenes: ()  => dispatch(ordenesActions.cargarOrdenes()),
         actualizarFiltroOrdenes: (filtro)  => dispatch(ordenesActions.actualizarFiltro(filtro)),
-        actualizarPageOrdenes: (page)  => dispatch(ordenesActions.actualizarPage(page)),
+        actualizarPageOrdenes: (page, dispatcher)  => dispatch(ordenesActions.actualizarPage(page, dispatcher)),
+        actualizarPageAgentes: (page, dispatcher)  => dispatch(agentesActions.actualizarPage(page, dispatcher)),
       }
     }
     
@@ -211,7 +225,7 @@ class homeLayout extends Component {
         component.props.cambiarEstadoAsistente()
         return
       }
-      else if (Recognition.containsAny(transcript,Recognition.buscarVerbs)!==null){
+      else if (Recognition.containsAny(transcript,Recognition.buscarVerbs)!==null && Recognition.containsAny(transcript,Recognition.buscarVerbs)!=transcript){
         const keyword = Recognition.containsAny(transcript,Recognition.buscarVerbs)
         
         switch(window.location.pathname) {
@@ -247,15 +261,46 @@ class homeLayout extends Component {
         }
         return
       }
+      else if (Recognition.containsAny(transcript,Recognition.irVerbs)!==null && Recognition.containsAny(transcript,Recognition.siguienteNouns)!==null && Recognition.containsAny(transcript,Recognition.pageNouns)!==null){
+        switch(window.location.pathname) {
+            case "/Agentes":
+              component.props.actualizarPageAgentes(component.props.currentPageAgentes+1, true)
+              break;
+            case "/Ordenes":
+              component.props.actualizarPageOrdenes(component.props.currentPageOrdenes+1, true)
+              break;
+            case "/Distribucion":
+              break;  
+            default:
+              Speech.Speech(Speech.wrongContext)
+          }
+          return
+      }
+      else if (Recognition.containsAny(transcript,Recognition.irVerbs)!==null && Recognition.containsAny(transcript,Recognition.anteriorNouns)!==null && Recognition.containsAny(transcript,Recognition.pageNouns)!==null){
+        switch(window.location.pathname) {
+            case "/Agentes":
+              component.props.actualizarPageAgentes(component.props.currentPageAgentes-1, true)
+              break;
+            case "/Ordenes":
+              component.props.actualizarPageOrdenes(component.props.currentPageOrdenes-1,true)
+              break;
+            case "/Distribucion":
+              break;  
+            default:
+              Speech.Speech(Speech.wrongContext)
+          }
+          return
+      }
       else if (Recognition.containsAny(transcript,Recognition.irVerbs)!==null && Recognition.containsAny(transcript,Recognition.pageNouns)!==null){
         var page = Recognition.getFirstNumber(transcript)
         if(page!==undefined){
 
           switch(window.location.pathname) {
             case "/Agentes":
+              component.props.actualizarPageAgentes(page, true)
               break;
             case "/Ordenes":
-              component.props.actualizarPageOrdenes(page)
+              component.props.actualizarPageOrdenes(page, true)
               break;
             case "/Distribucion":
               break;  
@@ -264,6 +309,21 @@ class homeLayout extends Component {
           }
           return
         }
+      }
+      else if (Recognition.containsAny(transcript,Recognition.openModalVerbs)!==null && Recognition.containsAny(transcript,Recognition.ayudaNouns)!==null){
+        component.props.showAyudaModal()
+        Speech.Speech(Speech.ayudaShow)
+        return
+      }
+      else if (Recognition.containsAny(transcript,Recognition.irVerbs)!==null && Recognition.containsAny(transcript,Recognition.ayudalocationsNouns)!==null){
+        component.props.estadoAyudaModal===true? Speech.Speech(Speech.oK):Speech.Speech(Speech.ayudaShow)
+        component.props.changeAyudaTab(Recognition.containsAny(transcript,Recognition.ayudalocationsNouns))
+        return
+      }
+      else if (Recognition.containsAny(transcript,Recognition.closeModalVerbs)!==null && Recognition.containsAny(transcript,Recognition.ayudaNouns)!==null){
+        component.props.hideAyudaModal()
+        Speech.Speech(Speech.oK)
+        return
       }
       else if (Recognition.containsAny(transcript,Recognition.irVerbs)!==null){
         var location = Recognition.containsAny(transcript,Recognition.locationsNouns)
@@ -303,7 +363,6 @@ class homeLayout extends Component {
         Speech.Speech(Speech.name)
         return
       }
-
       Speech.Speech(Speech.NotFount)
       
     }

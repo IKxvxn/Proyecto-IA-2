@@ -8,7 +8,7 @@ export function cargarAgentes(){
         })
         dispatch({
             type: Acciones.CARGAR_AGENTES_SUCCESS,
-            data: Generador.generarAgentes(20)
+            data: Generador.generarAgentes(50)
         })
     }
 }
@@ -16,4 +16,10 @@ export function cargarAgentes(){
 export const actualizarFiltro = (filtro) => ({
     type: Acciones.CHANGE_FILTRO_AGENTES,
     data: filtro
+})
+
+export const actualizarPage = (page,dispatcher) => ({
+    type: Acciones.CHANGE_PAGE_AGENTES,
+    data: page,
+    dispatcher: dispatcher
 })

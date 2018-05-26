@@ -1,8 +1,8 @@
 import * as Generador from './generator'
 
-export const Init = ["Ahora podré ayudarte, puedes utilizar el comando ayuda en cualquier momento",
-                     "Estoy para servirte, recuerda que puedes pedir ayuda en cualquier momento",
-                     "Es un gusto saludarte, pide ayuda cuando lo necesites"]
+export const Init = ["Ahora podré ayudarte, puedes utilizar el comando consultar ayuda en cualquier momento",
+                     "Estoy para servirte, recuerda que puedes decir ver ayuda en cualquier momento",
+                     "Es un gusto saludarte, di el comando mostrar ayuda cuando lo necesites"]
 
 export const End = ["Adiós, fue un placer",
                     "Estaré acá siempre que lo necesites",
@@ -35,6 +35,10 @@ export const allwaysUp = ["La funcionalidad no se puede desactivar porque está 
 export const wrongIndex = ["Índice inválido",
                            "La página está fuera de rango",
                            "La página no existe"]
+
+export const ayudaShow = ["Espero que esta información te sea útil",
+                           "Acá podrás consultar cualquier dato sobre el funcionamiento de la aplicación",
+                           "Ésta es la página de ayuda, espero encuentres lo que buscas"]
 
 export const oK = ["Entendido", "Listo", "Deacuerdo", "Ok", "comprendido", "Hecho", "Realizado"]
 
