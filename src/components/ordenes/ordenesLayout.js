@@ -22,7 +22,6 @@ class ordenesLayout extends Component {
         <SearchBar 
           modo={0} 
           actualizarFiltro={this.props.actualizarFiltro} 
-          loading={this.props.estadoOrdenes.loading} 
           value={this.props.estadoOrdenes.filtro} 
           handleButtonAction={this.props.cargarOrdenes}/>
         <Table 

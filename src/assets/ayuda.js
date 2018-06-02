@@ -115,6 +115,15 @@ export const comandoGeneral = [
     },
 ]
 
+export const comandoResumen = [
+    {key:1, descripcion:
+        <Row type="flex" justify="space-between" aling="center">
+            <Col span={7} style={Style.comandoName}>Cerrar Ayuda</Col>
+            <Col span={16}> {selectGen(Rec.closeModalVerbs)} + {selectGen(Rec.resumenNouns)} </Col>
+        </Row>
+    },
+]
+
 export const comandoAsistente = [
     {key:1, descripcion:
         <Row type="flex" justify="space-between" aling="center">
@@ -144,6 +153,12 @@ export const comandoTablas = [
         <Row type="flex" justify="space-between" aling="center">
             <Col span={7} style={Style.comandoName}>Cargar Datos</Col>
             <Col span={16}> {selectGen(Rec.cargarVerbs)} + {selectGen(Rec.datosVerbs)} </Col>
+        </Row>
+    },
+    {key:5, descripcion:
+        <Row type="flex" justify="space-between" aling="center">
+            <Col span={7} style={Style.comandoName}>Calcular Distribución</Col>
+            <Col span={16}> {selectGen(Rec.calcularVerbs)} + {selectGen(Rec.distribucionNouns)} </Col>
         </Row>
     },
     {key:2, descripcion:

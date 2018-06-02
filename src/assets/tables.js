@@ -31,9 +31,13 @@ export const ordenesColumns = [{
   }];
 
   export const distribucionColumns  = [{
+    title: '#',
+    dataIndex: 'key',
+    width: "7.4rem",
+  },{
     title: 'ID',
     dataIndex: 'id',
-    width: "14.8rem",
+    width: "7.4rem",
   },{
     title: 'Agente',
     dataIndex: 'name',
@@ -66,4 +70,13 @@ export const ordenesColumns = [{
   export const ayudaSingleColumns = [{
     title: '',
     dataIndex: 'descripcion',
+  }];
+
+  export const errorNormalColumns = [{
+    title: 'Fila',
+    dataIndex: 'key',
+    width: "3rem"
+  }, {
+    title: 'Descripción del error',
+    dataIndex: 'error',
   }];

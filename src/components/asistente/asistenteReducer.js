@@ -9,12 +9,14 @@ message.config({
 
 const DEFAULT_STATE = {
     estadoAsistente:false,
-    estadoNotificaciones:false,
+    estadoNotificaciones:true,
     estadoAyuda:false,
     speaking:true,
     thinking:false,
     estadoAyudaModal:false,
+    estadoErrorModal:false,
     currentTabAyuda:"simbología",
+    errors:[]
 }
 
 const asistenteReducer = (state = DEFAULT_STATE, action) => {
@@ -50,6 +52,21 @@ const asistenteReducer = (state = DEFAULT_STATE, action) => {
                 ...state,
                 estadoAyudaModal:false
             }
+        case Acciones.CARGAR_ORDENES_FAILURE:
+        case Acciones.CARGAR_AGENTES_FAILURE:
+            if(state.estadoAsistente===true){Speech.Speech(Speech.cargarErrors)}
+            else if(state.estadoNotificaciones===true){message.warning(Speech.cargarErrors[0])}
+            return{
+                ...state,
+                estadoErrorModal:true,
+                errors:action.data[1]
+            }
+        case Acciones.HIDE_ERROR_MODAL:
+            return{
+                ...state,
+                estadoErrorModal:false,
+                errors:[]
+            }
         case Acciones.CHANGE_AYUDA_TAB:
             return{
                 ...state,
@@ -66,7 +83,8 @@ const asistenteReducer = (state = DEFAULT_STATE, action) => {
                     estadoNotificaciones: !state.estadoNotificaciones,
                 }  
             }
-            return state 
+            return state
+        case Acciones.CARGAR_DISTRIBUCION_SUCCESS:   
         case Acciones.CARGAR_ORDENES_SUCCESS:    
         case Acciones.CARGAR_AGENTES_SUCCESS:
             if(state.estadoAsistente===true){Speech.Speech(Speech.cargarSucess)}

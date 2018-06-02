@@ -22,7 +22,7 @@ class App extends React.Component {
           style={{minWidth:"38rem", top:25}}
           onCancel={this.props.hideAyudaModal}
           footer={[
-            <Button key="submit" type="primary" onClick={this.handleCancel}>
+            <Button key="submit" type="primary" onClick={this.props.hideAyudaModal}>
               Volver
             </Button>,
           ]}
@@ -45,6 +45,7 @@ class App extends React.Component {
                 <AyudaTable title="Ayuda" columns={Columns.ayudaSingleColumns} data={AyudaData.comandoGeneral} scrollx="25rem"/>
                 <AyudaTable title="Tablas" columns={Columns.ayudaSingleColumns} data={AyudaData.comandoTablas} scrollx="32rem"/>
                 <AyudaTable title="Búsqueda" columns={Columns.ayudaSingleColumns} data={AyudaData.comandoBusqueda} scrollx="28rem"/>
+                <AyudaTable title="Resumen" columns={Columns.ayudaSingleColumns} data={AyudaData.comandoResumen} scrollx="25rem"/>
                 <AyudaTable title="Asistente" columns={Columns.ayudaSingleColumns} data={AyudaData.comandoAsistente} scrollx="25rem"/>
             </TabPane>
         </Tabs>

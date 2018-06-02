@@ -25,9 +25,14 @@ export const showAyudaModal = () => ({
     type: Acciones.SHOW_AYUDA_MODAL
 })
 
+export const hideErrorModal = () => ({
+    type: Acciones.HIDE_ERROR_MODAL
+})
+
 export const hideAyudaModal = () => ({
     type: Acciones.HIDE_AYUDA_MODAL
 })
+
 
 export const changeAyudaTab = (tab) => ({
     type: Acciones.CHANGE_AYUDA_TAB,

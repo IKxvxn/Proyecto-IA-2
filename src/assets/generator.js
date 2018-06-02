@@ -43,11 +43,20 @@ function shuffle(array) {
 
 export function generarAgentes(cantidad){
     var respuesta = []
+    var ids = []
     
     while(cantidad!==0){
         var parcial={}
         parcial.key = cantidad
-        parcial.id = getRandomArbitrary(1,8)+"0"+getRandomArbitrary(100,999)+"0"+getRandomArbitrary(100,999)
+
+        while(true){
+            parcial.id = getRandomArbitrary(1,8)+"0"+getRandomArbitrary(100,999)+"0"+getRandomArbitrary(100,999)
+            if(!ids.includes(parcial.id)){
+                ids.push(parcial.id)
+                break;
+            }
+        }
+        
         parcial.name = nombres[getRandomArbitrary(0,nombres.length)]+" "+apellidos[getRandomArbitrary(0,apellidos.length)]+" "+apellidos[getRandomArbitrary(0,apellidos.length)]
         parcial.codes = shuffle(codes).slice(0,getRandomArbitrary(1,codes.length+1))
         
@@ -61,6 +70,7 @@ export function generarAgentes(cantidad){
 
 export function generarOrdenes(cantidad){
     var respuesta = []
+    var ids = []
     
     while(cantidad!==0){
         var parcial={}
@@ -68,8 +78,13 @@ export function generarOrdenes(cantidad){
         parcial.name = nombres[getRandomArbitrary(0,nombres.length)]+" "+apellidos[getRandomArbitrary(0,apellidos.length)]+" "+apellidos[getRandomArbitrary(0,apellidos.length)]
         parcial.code = shuffle(codes).slice(0,getRandomArbitrary(1,2))[0]
         
-        parcial.id = parcial.code+"-"+getRandomArbitrary(100,999)+"-"+getRandomArbitrary(100,999)+"-"+getRandomArbitrary(100,999)
-
+        while(true){
+            parcial.id = parcial.code+"-"+getRandomArbitrary(100,999)+"-"+getRandomArbitrary(100,999)+"-"+getRandomArbitrary(100,999)
+            if(!ids.includes(parcial.id)){
+                ids.push(parcial.id)
+                break;
+            }
+        }
         respuesta.push(parcial)
 
         cantidad-=1

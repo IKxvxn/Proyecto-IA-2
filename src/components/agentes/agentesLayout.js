@@ -22,7 +22,6 @@ class agentesLayout extends Component {
         <SearchBar 
           modo={0} 
           actualizarFiltro={this.props.actualizarFiltro} 
-          loading={this.props.estadoAgentes.loading} 
           value={this.props.estadoAgentes.filtro} 
           handleButtonAction={this.props.cargarAgentes}/>
         <Table 

@@ -27,7 +27,7 @@ const ordenesReducer = (state = DEFAULT_STATE, action) => {
             return {
                 ...state,
                 loading: false,
-                data: [],
+                data: action.data[0]
             }
         case Acciones.CHANGE_FILTRO_ORDENES:
             return {
@@ -35,7 +35,7 @@ const ordenesReducer = (state = DEFAULT_STATE, action) => {
                 filtro: action.data,
             }
         case Acciones.CHANGE_PAGE_ORDENES:
-            if(action.data<=state.data.length/state.pageSize && action.data>0){
+            if(action.data<=Math.ceil(state.data.length/state.pageSize) && action.data>0){
                 if(action.dispatcher){Speech.Speech(Speech.oK)}
                 return{
                     ...state,

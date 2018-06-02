@@ -8,11 +8,13 @@ import Distribucion from '../distribucion/distribucionLayout'
 import Asistente from '../asistente/asistenteLayout'
 import AsistenteDisplayer from './asistenteDisplayer'
 import Ayuda from '../modals/ayuda'
+import Error from '../modals/error'
 import * as Speech from '../../assets/speech'
 import * as Recognition from '../../assets/recognition'
 import * as asistenteActions from '../asistente/asistenteActions'
 import * as agentesActions from '../agentes/agentesActions'
 import * as ordenesActions from '../ordenes/ordenesActions'
+import * as distribucionActions from '../distribucion/distribucionActions'
 import * as Style from '../../style/styleHomeLayout';
 
 import '../../style/codes.css'
@@ -116,6 +118,7 @@ class homeLayout extends Component {
                 </Switch>
               </Content>
             </Layout>
+            <Error errors={this.props.chargeErrors} estadoErrorModal={this.props.estadoErrorModal} showErrorModal={this.props.showErrorModal} hideErrorModal={this.props.hideErrorModal}/>
           </Layout>
         );
       }
@@ -156,8 +159,11 @@ class homeLayout extends Component {
         estadoAsistente: state.asistenteReducer.estadoAsistente,
         currentTabAyuda: state.asistenteReducer.currentTabAyuda,
         estadoAyudaModal: state.asistenteReducer.estadoAyudaModal,
+        estadoErrorModal: state.asistenteReducer.estadoErrorModal,
         currentPageOrdenes: state.ordenesReducer.currentPage,
         currentPageAgentes: state.agentesReducer.currentPage,
+        currentPageDistribucion: state.distribucionReducer.currentPage,
+        chargeErrors:state.asistenteReducer.errors,
       }
     }
     
@@ -168,13 +174,21 @@ class homeLayout extends Component {
         cambiarEstadoAsistente: ()  => dispatch(asistenteActions.cambiarEstadoAsistente()),
         hideAyudaModal: ()  => dispatch(asistenteActions.hideAyudaModal()),
         showAyudaModal: ()  => dispatch(asistenteActions.showAyudaModal()),
-        changeAyudaTab: (tab) => dispatch(asistenteActions.changeAyudaTab(tab)) ,
+        changeAyudaTab: (tab) => dispatch(asistenteActions.changeAyudaTab(tab)),
+        hideErrorModal: ()  => dispatch(asistenteActions.hideErrorModal()),
         cargarAgentes: ()  => dispatch(agentesActions.cargarAgentes()),
         actualizarFiltroAgente: (filtro)  => dispatch(agentesActions.actualizarFiltro(filtro)),
         cargarOrdenes: ()  => dispatch(ordenesActions.cargarOrdenes()),
+        calcularDistribucion: ()  => dispatch(distribucionActions.calcularDistribucion()),
         actualizarFiltroOrdenes: (filtro)  => dispatch(ordenesActions.actualizarFiltro(filtro)),
+        actualizarFiltroDistribucion: (filtro)  => dispatch(distribucionActions.actualizarFiltro(filtro)),
         actualizarPageOrdenes: (page, dispatcher)  => dispatch(ordenesActions.actualizarPage(page, dispatcher)),
         actualizarPageAgentes: (page, dispatcher)  => dispatch(agentesActions.actualizarPage(page, dispatcher)),
+        actualizarPageDistribucion: (page, dispatcher)  => dispatch(distribucionActions.actualizarPage(page, dispatcher)),
+        addExpandedDistribucion: (page, dispatcher)  => dispatch(distribucionActions.addExpanded(page, dispatcher)),
+        removeExpandedDistribucion: (page, dispatcher)  => dispatch(distribucionActions.removeExpanded(page, dispatcher)),
+        allExpandedDistribucion: (dispatcher)  => dispatch(distribucionActions.allExpanded(dispatcher)),
+        noneExpandedDistribucion: (dispatcher)  => dispatch(distribucionActions.noneExpanded(dispatcher)),
       }
     }
     
@@ -238,11 +252,85 @@ class homeLayout extends Component {
             Speech.Speech(Speech.oK)
             break;
           case "/Distribucion":
+            component.props.actualizarFiltroDistribucion(transcript.replace(keyword,''))
+            Speech.Speech(Speech.oK)
             break;  
           default:
             Speech.Speech(Speech.wrongContext)
         }
         return
+      }
+      else if (Recognition.containsAny(transcript,Recognition.expandirVerbs)!==null && Recognition.containsAny(transcript,Recognition.rowNouns)!==null && Recognition.containsAny(transcript,Recognition.allNouns)!==null) {
+          switch(window.location.pathname) {
+            case "/Agentes":
+              Speech.Speech(Speech.noRowsToExpand)
+              break;
+            case "/Ordenes":
+            Speech.Speech(Speech.noRowsToExpand)
+              break;
+            case "/Distribucion":
+              component.props.allExpandedDistribucion(true)
+              break;  
+            default:
+              Speech.Speech(Speech.wrongContext)
+          }
+          return
+      }
+      else if (Recognition.containsAny(transcript,Recognition.expandirVerbs)!==null && Recognition.containsAny(transcript,Recognition.rowNouns)!==null){
+        var page = Recognition.getFirstNumber(transcript)
+        if(page!==undefined){
+
+          switch(window.location.pathname) {
+            case "/Agentes":
+              Speech.Speech(Speech.noRowsToExpand)
+              break;
+            case "/Ordenes":
+            Speech.Speech(Speech.noRowsToExpand)
+              break;
+            case "/Distribucion":
+              component.props.addExpandedDistribucion(page, true)
+              break;  
+            default:
+              Speech.Speech(Speech.wrongContext)
+          }
+          return
+        }
+      }
+      else if (Recognition.containsAny(transcript,Recognition.colapsarVerbs)!==null && Recognition.containsAny(transcript,Recognition.allNouns)!==null && Recognition.containsAny(transcript,Recognition.rowNouns)!==null){
+        switch(window.location.pathname) {
+          case "/Agentes":
+            Speech.Speech(Speech.noRowsToExpand)
+            break;
+          case "/Ordenes":
+          Speech.Speech(Speech.noRowsToExpand)
+            break;
+          case "/Distribucion":
+            component.props.noneExpandedDistribucion(true)
+            break;  
+          default:
+            Speech.Speech(Speech.wrongContext)
+        }
+        return
+     }
+      else if (Recognition.containsAny(transcript,Recognition.colapsarVerbs)!==null && Recognition.containsAny(transcript,Recognition.rowNouns)!==null){
+        var page = Recognition.getFirstNumber(transcript)
+        if(page!==undefined){
+
+          switch(window.location.pathname) {
+            case "/Agentes":
+              Speech.Speech(Speech.noRowsToExpand)
+              break;
+            case "/Ordenes":
+            Speech.Speech(Speech.noRowsToExpand)
+              break;
+            case "/Distribucion":
+              component.props.removeExpandedDistribucion(page, true)
+              break;  
+            default:
+              Speech.Speech(Speech.wrongContext)
+          }
+          return
+        }
       }
       else if (Recognition.containsAny(transcript,Recognition.busquedaNouns)!==null&&Recognition.containsAny(transcript,Recognition.limpiarVerbs)!==null){
         switch(window.location.pathname) {
@@ -255,6 +343,8 @@ class homeLayout extends Component {
             Speech.Speech(Speech.oK)
             break;
           case "/Distribucion":
+            component.props.actualizarFiltroDistribucion("")
+            Speech.Speech(Speech.oK)
             break;  
           default:
             Speech.Speech(Speech.wrongContext)
@@ -270,6 +360,7 @@ class homeLayout extends Component {
               component.props.actualizarPageOrdenes(component.props.currentPageOrdenes+1, true)
               break;
             case "/Distribucion":
+              component.props.actualizarPageDistribucion(component.props.currentPageDistribucion+1, true)
               break;  
             default:
               Speech.Speech(Speech.wrongContext)
@@ -285,6 +376,7 @@ class homeLayout extends Component {
               component.props.actualizarPageOrdenes(component.props.currentPageOrdenes-1,true)
               break;
             case "/Distribucion":
+              component.props.actualizarPageDistribucion(component.props.currentPageDistribucion-1, true)
               break;  
             default:
               Speech.Speech(Speech.wrongContext)
@@ -303,6 +395,7 @@ class homeLayout extends Component {
               component.props.actualizarPageOrdenes(page, true)
               break;
             case "/Distribucion":
+              component.props.actualizarPageDistribucion(page, true)
               break;  
             default:
               Speech.Speech(Speech.wrongContext)
@@ -322,6 +415,11 @@ class homeLayout extends Component {
       }
       else if (Recognition.containsAny(transcript,Recognition.closeModalVerbs)!==null && Recognition.containsAny(transcript,Recognition.ayudaNouns)!==null){
         component.props.hideAyudaModal()
+        Speech.Speech(Speech.oK)
+        return
+      }
+      else if (Recognition.containsAny(transcript,Recognition.closeModalVerbs)!==null && Recognition.containsAny(transcript,Recognition.resumenNouns)!==null){
+        component.props.hideErrorModal()
         Speech.Speech(Speech.oK)
         return
       }
@@ -351,8 +449,17 @@ class homeLayout extends Component {
           case "/Ordenes":
             component.props.cargarOrdenes()
             break;
+          default:
+            Speech.Speech(Speech.wrongContext)
+              
+        }
+        return
+      }
+      else if (Recognition.containsAny(transcript,Recognition.calcularVerbs)!==null && Recognition.containsAny(transcript,Recognition.distribucionNouns)!==null){
+        switch(window.location.pathname) {
           case "/Distribucion":
-            break;  
+              component.props.calcularDistribucion()
+              break;
           default:
             Speech.Speech(Speech.wrongContext)
               

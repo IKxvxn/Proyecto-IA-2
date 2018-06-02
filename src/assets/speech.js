@@ -19,9 +19,33 @@ export const name = ["Me llamo Asistente, mucho gusto",
                      "Puedes llamarme Asistente",
                      "Me gusta que me llamen Asistente"]
 
+export const alreadyExpanded = ["La fila ya está siendo mostrada",
+                                "No se puede expandir la fila porque ya está expandia",
+                                "Parece que la fila ya está abierta"]
+
+export const notExpanded = ["La fila ya está cerrada",
+                                "No se puede colapsar la fila porque ya está cerrada",
+                                "Parece que la fila ya está colapsada"]
+
+export const noRowsToExpand = ["No se puede expandir ninguna fila en esta tabla",
+                                "Las filas de esta tabla no se pueden abrir",
+                                "Parece que estas filas no se pueden expandir"]
+
+export const alreadyShowingAll = ["Ya todas las filas están siendo mostradas",
+                                  "Ya se están mostrando todas las filas",
+                                  "Parece que ya todas las filas están abiertas"]
+
+export const alreadyClosedAll = ["Ya todas las filas están colapsadas",
+                                  "Ya están cerradas todas las filas",
+                                  "Parece que ya todas las filas están cerradas"]
+
 export const cargarSucess = ["Información cargada satisfactoriamente",
                              "La información está lista para ser consultada",
                              "Los datos han sido cargados exitosamente"]
+
+export const cargarErrors = ["Información cargada, las filas con errores fueron eliminadas",
+                             "La información fue cargada, los errores fueron ignorados",
+                             "Los datos han sido cargados, las filas con errores fueron excluídas"]
 
 export const wrongContext = ["Comando inválido en este contexto",
                              "Lo siento, pero ese comando no puede ser utilizado aquí",
@@ -35,6 +59,10 @@ export const allwaysUp = ["La funcionalidad no se puede desactivar porque está 
 export const wrongIndex = ["Índice inválido",
                            "La página está fuera de rango",
                            "La página no existe"]
+
+export const wrongRowIndex = ["Índice inválido",
+                           "La fila está fuera de rango",
+                           "La fila no existe"]
 
 export const ayudaShow = ["Espero que esta información te sea útil",
                            "Acá podrás consultar cualquier dato sobre el funcionamiento de la aplicación",

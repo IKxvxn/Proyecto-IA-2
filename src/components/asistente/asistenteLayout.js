@@ -33,32 +33,6 @@ class asistenteLayout extends Component {
             />
           </Card>
         </Col>
-        <Col> 
-          <Card
-            hoverable
-            onClick={() => this.props.cambiarEstadoNotificaciones()}
-            style={{ width: "13rem" }}
-            cover={<img alt="Imagen de Notificaciones" src={Mensajes} />}
-          >
-            <Meta
-              title={<Row><Col span={20}>Notificaciones</Col><Col span={4}><Rate style={{color:"#1890ff"}} count={1} disabled value={this.props.estadoNotificaciones||this.props.estadoAsistente?1:0} character={<Icon type={this.props.estadoNotificaciones||this.props.estadoAsistente?"check-circle":"close-circle"}/>}  /></Col></Row>}
-              description="Informa sobre sucesos"
-            />
-          </Card>
-        </Col>
-        <Col> 
-          <Card
-            hoverable
-            onClick={() => this.setState({ayuda:!this.state.ayuda})}
-            style={{ width: "13rem" }}
-            cover={<img alt="Imagen de Ayuda" src={Ayuda} />}
-          >
-            <Meta
-              title={<Row><Col span={20}>Información</Col><Col span={4}><Rate style={{color:"#1890ff"}} count={1} disabled value={this.state.ayuda||this.props.estadoAsistente?1:0} character={<Icon type={this.state.ayuda||this.props.estadoAsistente?"check-circle":"close-circle"}/>}  /></Col></Row>}
-              description="Ayuda según contexto"
-            />
-          </Card>
-        </Col>
       </Row>
     );
   }
