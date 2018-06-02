@@ -36,6 +36,7 @@ const ordenesReducer = (state = DEFAULT_STATE, action) => {
             }
         case Acciones.CHANGE_PAGE_ORDENES:
             if(action.data<=Math.ceil(state.data.length/state.pageSize) && action.data>0){
+                if(action.data===state.currentPage){if(action.dispatcher){Speech.Speech(Speech.alreadyOnPage)};return state}
                 if(action.dispatcher){Speech.Speech(Speech.oK)}
                 return{
                     ...state,

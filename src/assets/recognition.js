@@ -25,9 +25,12 @@ export const pageNouns = ["página","sección"]
 export const busquedaNouns = ["búsqueda","filtro"]
 export const asistenteNouns = ["asistente"]
 export const locationsNouns = ["a gentes","agentes","órdenes", "distribución", "asistente"]
-export const ayudalocationsNouns = ["simbología","interfaz","comandos"]
+export const ayudalocationsNouns = ["simbología","interfaz","comandos","preguntas"]
 
 export const nameQuestions = ["cómo te llamas","cuál es tu nombre","dime tu nombre","cómo te llaman"]
+export const estadoQuestions = ["cómo estás","cómo te sientes","qué tal estás","estás bien"]
+export const edadQuestions = ["cuántos años tienes","cuál es tu edad"]
+export const afectoQuestions = ["me quieres","te quiero","sientes algo por mí"]
 
 export function containsAny(str, substrings) {
   for (var i = 0; i !== substrings.length; i++) {

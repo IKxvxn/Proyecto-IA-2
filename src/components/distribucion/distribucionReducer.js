@@ -35,6 +35,7 @@ const distribucionReducer = (state = DEFAULT_STATE, action) => {
                 filtro: action.data,
             }
         case Acciones.CHANGE_PAGE_DISTRIBUCION:
+            if(action.data===state.currentPage){if(action.dispatcher){Speech.Speech(Speech.alreadyOnPage)};return state}
             if(action.data<=Math.ceil(state.data.length/state.pageSize) && action.data>0){
                 if(action.dispatcher){Speech.Speech(Speech.oK)}
                 return{

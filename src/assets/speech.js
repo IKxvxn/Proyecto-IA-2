@@ -15,9 +15,21 @@ export const NotFount = ["No te he entendido",
                          "Inténtalo nuevamente, no te entendí",
                          "Perdón, ¿Qué dijiste?"]
 
-export const name = ["Me llamo Asistente, mucho gusto",
-                     "Puedes llamarme Asistente",
-                     "Me gusta que me llamen Asistente"]
+export const alreadyOnPage = ["Ya estás en la página que deseas",
+                              "Ya se te está mostrando la sección que deseas ver",
+                              "Parece que ya estás viendo la página solicitada"]
+
+export const alreadyShowingHelp = ["Ya estás viendo la ventana de ayuda",
+                                   "Ya se te está mostrando la sección de ayuda",
+                                   "Según mi conocimiento, ya estás viendo la ventana de ayuda"]
+
+export const alreadyClosedHelp = ["La ventana de ayuda se encuentra cerrada",
+                                   "La sección de ayuda ya está cerrada",
+                                   "Según mi conocimiento, la sección de ayuda se encuentra cerrada"]
+                                   
+export const alreadyClosedError = ["La ventana de resumen se encuentra cerrada",
+                                   "La sección de resumen de errores ya está cerrada",
+                                   "Según mi conocimiento, la sección de resumen se encuentra cerrada"]
 
 export const alreadyExpanded = ["La fila ya está siendo mostrada",
                                 "No se puede expandir la fila porque ya está expandia",
@@ -26,6 +38,14 @@ export const alreadyExpanded = ["La fila ya está siendo mostrada",
 export const notExpanded = ["La fila ya está cerrada",
                                 "No se puede colapsar la fila porque ya está cerrada",
                                 "Parece que la fila ya está colapsada"]
+
+export const alreadyColapsedMenu = ["El menú se encuentra cerrado",
+                                    "No se puede colapsar el menú porque ya está cerrado",
+                                    "Parece que el menú ya está colapsado"]
+
+export const alreadyOpenedMenu = ["El menú se encuentra abierto",
+                                    "No se puede expandir el menú porque ya está abierto",
+                                    "Parece que el menú ya está abierto"]
 
 export const noRowsToExpand = ["No se puede expandir ninguna fila en esta tabla",
                                 "Las filas de esta tabla no se pueden abrir",
@@ -69,6 +89,23 @@ export const ayudaShow = ["Espero que esta información te sea útil",
                            "Ésta es la página de ayuda, espero encuentres lo que buscas"]
 
 export const oK = ["Entendido", "Listo", "Deacuerdo", "Ok", "comprendido", "Hecho", "Realizado"]
+
+
+export const name = ["Me llamo Asistente, mucho gusto",
+                     "Puedes llamarme Asistente",
+                     "Me gusta que me llamen Asistente"]
+               
+export const estado = ["Muy bien, gracias por preguntar",
+                       "Me siento genial, gracias por preocuparte",
+                       "No podría estar mejor, espero que te sientas igual"]
+
+export const edad = ["Técnicamente, estoy viva mientras el programa esté en ejecución",
+                       "Pues un par de minutos, la verdad",
+                       "Existo mientras el ambiente actual de ejecución lo haga"]
+
+export const afecto = ["Deberíamos seguir trabajando",
+                       "Las máquinas no desarrollamos la afectividad, lo siento",
+                       "Las muestras de afecto realmente no son lo mío"]
 
 var sayTimeout = null;
 

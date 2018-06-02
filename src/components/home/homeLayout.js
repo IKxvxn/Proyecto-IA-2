@@ -159,6 +159,7 @@ class homeLayout extends Component {
         estadoAsistente: state.asistenteReducer.estadoAsistente,
         currentTabAyuda: state.asistenteReducer.currentTabAyuda,
         estadoAyudaModal: state.asistenteReducer.estadoAyudaModal,
+        currentTabAyuda: state.asistenteReducer.currentTabAyuda,
         estadoErrorModal: state.asistenteReducer.estadoErrorModal,
         currentPageOrdenes: state.ordenesReducer.currentPage,
         currentPageAgentes: state.agentesReducer.currentPage,
@@ -404,21 +405,25 @@ class homeLayout extends Component {
         }
       }
       else if (Recognition.containsAny(transcript,Recognition.openModalVerbs)!==null && Recognition.containsAny(transcript,Recognition.ayudaNouns)!==null){
+        if(component.props.estadoAyudaModal===true){Speech.Speech(Speech.alreadyShowingHelp);return}
         component.props.showAyudaModal()
         Speech.Speech(Speech.ayudaShow)
         return
       }
       else if (Recognition.containsAny(transcript,Recognition.irVerbs)!==null && Recognition.containsAny(transcript,Recognition.ayudalocationsNouns)!==null){
+        if(component.props.estadoAyudaModal===true && component.props.currentTabAyuda===Recognition.containsAny(transcript,Recognition.ayudalocationsNouns)){Speech.Speech(Speech.alreadyOnPage);return}
         component.props.estadoAyudaModal===true? Speech.Speech(Speech.oK):Speech.Speech(Speech.ayudaShow)
         component.props.changeAyudaTab(Recognition.containsAny(transcript,Recognition.ayudalocationsNouns))
         return
       }
       else if (Recognition.containsAny(transcript,Recognition.closeModalVerbs)!==null && Recognition.containsAny(transcript,Recognition.ayudaNouns)!==null){
+        if(component.props.estadoAyudaModal===false){Speech.Speech(Speech.alreadyClosedHelp);return}
         component.props.hideAyudaModal()
         Speech.Speech(Speech.oK)
         return
       }
       else if (Recognition.containsAny(transcript,Recognition.closeModalVerbs)!==null && Recognition.containsAny(transcript,Recognition.resumenNouns)!==null){
+        if(component.props.estadoErrorModal===false){Speech.Speech(Speech.alreadyClosedError);return}
         component.props.hideErrorModal()
         Speech.Speech(Speech.oK)
         return
@@ -426,17 +431,20 @@ class homeLayout extends Component {
       else if (Recognition.containsAny(transcript,Recognition.irVerbs)!==null){
         var location = Recognition.containsAny(transcript,Recognition.locationsNouns)
         if (location!==null){
+          if(window.location.pathname.includes(toTitleCase(location))){Speech.Speech(Speech.alreadyOnPage);return}
           component.changeLocation(location)
           Speech.Speech(Speech.oK)
           return
         }
       }
       else if (Recognition.containsAny(transcript,Recognition.colapsarVerbs)!==null && Recognition.containsAny(transcript,Recognition.menuNouns)!==null){
+        if(component.state.collapsed===true){Speech.Speech(Speech.alreadyColapsedMenu);return}
         component.toggle(true)
         Speech.Speech(Speech.oK)
         return
       }
       else if (Recognition.containsAny(transcript,Recognition.expandirVerbs)!==null && Recognition.containsAny(transcript,Recognition.menuNouns)!==null){
+        if(component.state.collapsed===false){Speech.Speech(Speech.alreadyOpenedMenu);return}
         component.toggle(false)
         Speech.Speech(Speech.oK)
         return
@@ -470,9 +478,28 @@ class homeLayout extends Component {
         Speech.Speech(Speech.name)
         return
       }
+      else if (Recognition.containsAny(transcript,Recognition.estadoQuestions)!==null){
+        Speech.Speech(Speech.estado)
+        return
+      }
+      else if (Recognition.containsAny(transcript,Recognition.edadQuestions)!==null){
+        Speech.Speech(Speech.edad)
+        return
+      }
+      else if (Recognition.containsAny(transcript,Recognition.afectoQuestions)!==null){
+        Speech.Speech(Speech.afecto)
+        return
+      }
       Speech.Speech(Speech.NotFount)
       
     }
 
     
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(homeLayout))
+
+function toTitleCase(str) {
+  str = str.replace("ó","o")
+  return str.replace(/\w\S*/g, function(txt){
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+}

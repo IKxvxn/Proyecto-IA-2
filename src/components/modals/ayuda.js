@@ -9,6 +9,7 @@ const TabPane = Tabs.TabPane;
 
 class App extends React.Component {
   render() {
+    console.log(AyudaData.preguntas)
     return (
       <div>
         <Icon
@@ -47,6 +48,9 @@ class App extends React.Component {
                 <AyudaTable title="Búsqueda" columns={Columns.ayudaSingleColumns} data={AyudaData.comandoBusqueda} scrollx="28rem"/>
                 <AyudaTable title="Resumen" columns={Columns.ayudaSingleColumns} data={AyudaData.comandoResumen} scrollx="25rem"/>
                 <AyudaTable title="Asistente" columns={Columns.ayudaSingleColumns} data={AyudaData.comandoAsistente} scrollx="25rem"/>
+            </TabPane>
+            <TabPane style={{maxHeight:"69vh", overflow:"auto"}} tab={<span><Icon type="question" />Preguntas</span>} key="preguntas">
+                <AyudaTable title="Preguntas" columns={Columns.ayudaSingleColumns} data={AyudaData.preguntas} scrollx="23rem"/>
             </TabPane>
         </Tabs>
         </Modal>

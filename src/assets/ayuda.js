@@ -12,6 +12,7 @@ export const simbologiaAyuda = [
     {key:2, objeto:<Icon type="layout" />, descripcion:"Información acerca de la distribución de la interfaz"},
     {key:3, objeto:<Icon type="share-alt" />, descripcion:"Información sobre la iconografía de la aplicación"},
     {key:4, objeto:<Icon type="message" />, descripcion:"Información de los comandos de voz"},
+    {key:0, objeto:<Icon type="question" />, descripcion:"Información referente a preguntas hacia el asistente"},
 ]
 
 export const simbologiaMenu = [
@@ -118,7 +119,7 @@ export const comandoGeneral = [
 export const comandoResumen = [
     {key:1, descripcion:
         <Row type="flex" justify="space-between" aling="center">
-            <Col span={7} style={Style.comandoName}>Cerrar Ayuda</Col>
+            <Col span={7} style={Style.comandoName}>Cerrar Resumen</Col>
             <Col span={16}> {selectGen(Rec.closeModalVerbs)} + {selectGen(Rec.resumenNouns)} </Col>
         </Row>
     },
@@ -175,8 +176,58 @@ export const comandoTablas = [
     },
     {key:4, descripcion:
         <Row type="flex" justify="space-between" aling="center">
-            <Col span={7} style={Style.comandoName}>Ir a Página  Anterior</Col>
+            <Col span={7} style={Style.comandoName}>Ir a Página Anterior</Col>
             <Col span={16}> {selectGen(Rec.irVerbs)} + {selectGen(Rec.pageNouns)} + {selectGen(Rec.anteriorNouns)} </Col>
+        </Row>
+    },
+    {key:6, descripcion:
+        <Row type="flex" justify="space-between" aling="center">
+            <Col span={7} style={Style.comandoName}>Expandir Fila</Col>
+            <Col span={16}> {selectGen(Rec.expandirVerbs)} + {selectGen(Rec.rowNouns.slice(0,1))} + {selectGen(["#"])} </Col>
+        </Row>
+    },
+    {key:7, descripcion:
+        <Row type="flex" justify="space-between" aling="center">
+            <Col span={7} style={Style.comandoName}>Colapsar Fila</Col>
+            <Col span={16}> {selectGen(Rec.colapsarVerbs)} + {selectGen(Rec.rowNouns.slice(0,1))} + {selectGen(["#"])} </Col>
+        </Row>
+    },
+    {key:8, descripcion:
+        <Row type="flex" justify="space-between" aling="center">
+            <Col span={7} style={Style.comandoName}>Expandir Todas las Filas</Col>
+            <Col span={16}> {selectGen(Rec.expandirVerbs)} + {selectGen(Rec.allNouns)} + {selectGen(Rec.rowNouns.slice(1))} </Col>
+        </Row>
+    },{key:9, descripcion:
+        <Row type="flex" justify="space-between" aling="center">
+            <Col span={7} style={Style.comandoName}>Colapsar Todas las Filas</Col>
+            <Col span={16}> {selectGen(Rec.colapsarVerbs)} + {selectGen(Rec.allNouns)} + {selectGen(Rec.rowNouns.slice(1))} </Col>
+        </Row>
+    },
+]
+
+export const preguntas = [
+    {key:1, descripcion:
+        <Row type="flex" justify="space-between" aling="center">
+            <Col span={7} style={Style.comandoName}>Conocer Nombre</Col>
+            <Col span={16}> {selectGen(Rec.nameQuestions)}</Col>
+        </Row>
+    },
+    {key:2, descripcion:
+        <Row type="flex" justify="space-between" aling="center">
+            <Col span={7} style={Style.comandoName}>Consultar Estado</Col>
+            <Col span={16}> {selectGen(Rec.estadoQuestions)}</Col>
+        </Row>
+    },
+    {key:3, descripcion:
+        <Row type="flex" justify="space-between" aling="center">
+            <Col span={7} style={Style.comandoName}>Averiguar Edad</Col>
+            <Col span={16}> {selectGen(Rec.edadQuestions)}</Col>
+        </Row>
+    },
+    {key:4, descripcion:
+        <Row type="flex" justify="space-between" aling="center">
+            <Col span={7} style={Style.comandoName}>Mostrar Afecto</Col>
+            <Col span={16}> {selectGen(Rec.afectoQuestions)}</Col>
         </Row>
     },
 ]
@@ -185,4 +236,4 @@ export const comandoTablas = [
 function selectGen(list){
     if(list.length===1){return <span style={{border:"solid",borderWidth:"thin",borderColor:"grey", borderRadius:"15px", padding:"0.3rem 0.5rem"}}>{list[0]}</span>}
     return <Select style={{border:"solid",borderWidth:"thin",borderColor:"grey", borderRadius:"5px"}}defaultValue={list[0]}>{list.map(function(item){return <Option value={item}>{item}</Option>})}</Select> 
-} 
+}
