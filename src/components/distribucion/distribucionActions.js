@@ -1,8 +1,10 @@
 import * as Acciones from '../../assets/actions'
 import * as Generador from "../../assets/generator"
 import * as Analysis from "../../assets/dataAnalysis"
+import * as Algorithm from "../../assets/genetic"
 
 export function calcularDistribucion(){ 
+    Algorithm.genetic(Generador.generarAgentes(10), Generador.generarOrdenes(30))
     return function (dispatch) { 
         dispatch({ 
           type: Acciones.CARGAR_DISTRIBUCION_REQUEST 
