@@ -5,10 +5,10 @@ import * as Algorithm from "../../assets/genetic"
 
 export function calcularDistribucion(){ 
 
-    var PopulationSize = 200
-    var NAgents = 2000
-    var NOrders = 500
-    var NGenerations = 1000
+    var PopulationSize = 10
+    var NAgents = 100
+    var NOrders = 600
+    var NGenerations = 100
     Algorithm.genetic(Generador.generarAgentes(NAgents), Generador.generarOrdenes(NOrders), NGenerations, PopulationSize)
     return function (dispatch) { 
         dispatch({ 
