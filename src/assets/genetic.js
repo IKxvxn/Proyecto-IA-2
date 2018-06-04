@@ -4,28 +4,36 @@ import { Select } from 'antd';
 
 // ----------------------------------------------------------------------------------------------------------
 
+/**
+ * 
+ * @param {*} Agents 
+ * @param {*} Orders 
+ * @param {*} NGenerations 
+ * @param {*} PopulationSize 
+ */
 export function genetic(Agents, Orders, NGenerations, PopulationSize)
 {
     var Population = GenerateInitialPopulation(Agents, Orders, PopulationSize)
     var NaturalSelected = [] 
-    var NumberOfExtractions = Math.ceil(0.3 * PopulationSize)
+    var NumberOfExtractions = 4 //Math.ceil(0.3 * PopulationSize)
     var MutatePercentage = 1
     var TopFitnessValue = 1000000
     
+    console.log(Population)
     while (0 <= NGenerations || TopFitnessValue <= 2000)
     {
         NaturalSelected = ExtractTopFitnessIndividuals(Population, NumberOfExtractions)
         Population = IndividualsCrossOver(NaturalSelected, PopulationSize, Orders)
-        Population = MutatePopulation(Population, PopulationSize, MutatePercentage, Orders)
+        // Population = MutatePopulation(Population, PopulationSize, MutatePercentage, Orders)
         
         TopFitnessValue = ExtractTopFitnessIndividuals(Population, 1)[0].Fitness
-        console.log("Fitness de la iteracion -> " + TopFitnessValue)
-        // console.log(ExtractTopFitnessIndividuals(Population, 1))
+        // console.log("Fitness de la iteracion -> " + TopFitnessValue)
+        // // console.log(ExtractTopFitnessIndividuals(Population, 1))
 
         NGenerations -= 1        
     }
     console.log('<<<<<<<<<<<<<<<- Poblacion Generada ->>>>>>>>>>>>>>>')
-    console.log(Population[0])
+    //console.log(Population[0])
 
     console.log(ExtractIndividualsData(ExtractTopFitnessIndividuals(Population, 1)[0]))
     return Population
@@ -42,7 +50,7 @@ function GenerateInitialPopulation(Agents, Orders, Size)
     while(Size !== 0){
           
         var Individual = {}
-        var OrdersCopy = Orders
+        var OrdersCopy = Orders.slice(0)
         Counter = 0
 
         // Creates the initial array with agents and empty orders array
@@ -100,7 +108,7 @@ function ExtractIndividualsData(Individuals)
             Counter += 1
         }
         AgentData.NumberOfOrders += Counter
-        AgentData.AverageWinnings = AgentData.TotalWinning / Counter
+        AgentData.AverageWinnings = isNaN(AgentData.TotalWinning / Counter) ? 0 : AgentData.TotalWinning / Counter
 
         GlobalHoursSum += AgentData.TotalHours
         GlobalWinningsSum += AgentData.TotalWinning
@@ -110,7 +118,7 @@ function ExtractIndividualsData(Individuals)
     GeneralFitnessData["GlobalHoursSum"] = GlobalHoursSum
     GeneralFitnessData["GlobalWinningsSum"] = GlobalWinningsSum
     GeneralFitnessData["NumberOfAgents"] = NumberOfAgents
-    GeneralFitnessData["AverageWinnings"] = GlobalWinningsSum / NumberOfAgents
+    GeneralFitnessData["AverageWinnings"] = isNaN(GlobalWinningsSum / NumberOfAgents) ? 0 : GlobalWinningsSum / NumberOfAgents
     GeneralFitnessData["DataPerIndividual"] = DataPerIndividual
     
     // console.log("GENERAL FITNESS DATA")
@@ -121,16 +129,16 @@ function ExtractIndividualsData(Individuals)
 
 // ----------------------------------------------------------------------------------------------------------
 
-function EstimateFitness(Individuals)
+function EstimateFitness(GeneralFitnessData)
 {
     var ResultantFitness = 0
-    var GeneralFitnessData = ExtractIndividualsData(Individuals)
+    //var GeneralFitnessData = ExtractIndividualsData(Individuals)
     var PenalizedHours = 0
     var PenalizedWinnings = 0
 
     for(var AgentID in GeneralFitnessData.DataPerIndividual)
     {
-        PenalizedHours = 40 - GeneralFitnessData.DataPerIndividual[AgentID].TotalHours
+        PenalizedHours = GeneralFitnessData.DataPerIndividual[AgentID].TotalHours
         if (PenalizedHours < 0){
             PenalizedHours = Math.abs(PenalizedHours) * 2
         }
@@ -138,7 +146,7 @@ function EstimateFitness(Individuals)
 
         ResultantFitness += PenalizedHours + PenalizedWinnings
     }
-    // console.log("Fitness: " + ResultantFitness)
+    // console.log("Fitness: " + JSON.stringify( ResultantFitness.toString()))
     return ResultantFitness
 }
 
@@ -153,16 +161,19 @@ function ExtractTopFitnessIndividuals(Population, NumberOfExtractions)
     // Extract the fitness for each Individual
     while(Counter < Population.length)
     {
-        TopFitness.push({"Index": Counter, "Fitness": EstimateFitness(Population[Counter])})
+        var GeneralFitnessData = ExtractIndividualsData(Population[Counter])
+        TopFitness.push({"Index": Counter, "Fitness": EstimateFitness(GeneralFitnessData)})
         Counter += 1
     }
 
-    TopFitness = SortArrayByField(TopFitness, 'Fitness', true).slice(0, NumberOfExtractions)
+    var OrderedExtractions = SortArrayByField(TopFitness, 'Fitness', true)
+    var FinalExtractions = NumberOfExtractions < OrderedExtractions.length ? NumberOfExtractions : Math.ceil(OrderedExtractions.length / 2)
+    TopFitness = SortArrayByField(TopFitness, 'Fitness', true).slice(0, FinalExtractions)
     Counter = 0
 
     while (Counter < TopFitness.length)
     {
-        Population[TopFitness[Counter].Index]["Fitness"] = TopFitness[Counter].Fitness
+        //Population[TopFitness[Counter].Index]["Fitness"] = TopFitness[Counter].Fitness
         NaturalSelection.push(Population[TopFitness[Counter].Index])
         Counter += 1
     }
@@ -197,7 +208,7 @@ function IndividualsCrossOver(NaturalSelection, PopulationSize, Orders)
     var FatherBKeys = []
     var PredecessorA = {}
     var PredecessorB = {}
-    var SliceIndex = Math.ceil(NumberOfAgents / 2)
+    var SliceIndex = Math.round(NumberOfAgents / 2)
     var Counter = 0
 
     while (PopulationSize > ResultantPopulation.length)
@@ -212,7 +223,7 @@ function IndividualsCrossOver(NaturalSelection, PopulationSize, Orders)
         PredecessorA = {}
         PredecessorB = {}
 
-        while (Counter < FatherAKeys.length - 1){
+        while (Counter < FatherAKeys.length){
             if (Counter < SliceIndex){
                 PredecessorA[FatherAKeys[Counter]] = FatherA[FatherAKeys[Counter]]
             } else {
@@ -288,7 +299,7 @@ function MutatePopulation(Population, PopulationSize, MutatePercentage, Orders)
     var FatherBKeys = []
     var PredecessorA = {}
     var PredecessorB = {}
-    var SliceIndex = Math.ceil(NumberOfAgents / 2)
+    var SliceIndex = Math.round(NumberOfAgents / 2)
     var Counter = 0
     var IndexToMute = []
 
