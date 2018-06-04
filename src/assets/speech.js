@@ -9,6 +9,10 @@ export const End = ["Adiós, fue un placer",
                     "Nos vemos, fue un placer ayudarte",
                     "Hasta la próxima, fue un placer"]
 
+export const DistError = ["Debes cargar los datos para poder continuar",
+                          "No puedo calcular la distribución porque no he encontrado los datos necesarios",
+                          "Los datos no están disponibles para calcular el algoritmo"]
+
 export const NotFount = ["No te he entendido",
                          "No pude comprenderte",
                          "Lo siento, no te entendí",

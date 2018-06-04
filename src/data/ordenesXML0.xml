@@ -1,0 +1,603 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+	<0>
+		<key>100</key>
+		<name>Julia Valdés Leiva</name>
+		<code>RCG</code>
+		<id>RCG-546-835-900</id>
+	</0>
+	<1>
+		<key>99</key>
+		<name>Antonia Valdés Vidal</name>
+		<code>RCE</code>
+		<id>RCE-426-131-325</id>
+	</1>
+	<2>
+		<key>98</key>
+		<name>Gabriel Martínez Gutiérrez</name>
+		<code>ILA</code>
+		<id>ILA-101-820-345</id>
+	</2>
+	<3>
+		<key>97</key>
+		<name>Emily Garrido Guerrero</name>
+		<code>RCG</code>
+		<id>RCG-513-313-903</id>
+	</3>
+	<4>
+		<key>96</key>
+		<name>Leo Medina Castillo</name>
+		<code>ICG</code>
+		<id>ICG-583-635-790</id>
+	</4>
+	<5>
+		<key>95</key>
+		<name>Alejandro Hernández Henríquez</name>
+		<code>ILA</code>
+		<id>ILA-324-329-697</id>
+	</5>
+	<6>
+		<key>94</key>
+		<name>Hugo Vera Zúñiga</name>
+		<code>ICE</code>
+		<id>ICE-711-799-836</id>
+	</6>
+	<7>
+		<key>93</key>
+		<name>Andrea Palma Jara</name>
+		<code>RCG</code>
+		<id>RCG-163-589-680</id>
+	</7>
+	<8>
+		<key>92</key>
+		<name>Amelia Flores Vargas</name>
+		<code>ILA</code>
+		<id>ILA-356-766-809</id>
+	</8>
+	<9>
+		<key>91</key>
+		<name>Gael Maldonado Vásquez</name>
+		<code>RCG</code>
+		<id>RCG-159-783-740</id>
+	</9>
+	<10>
+		<key>90</key>
+		<name>Nicolás Valenzuela Vera</name>
+		<code>ILA</code>
+		<id>ILA-301-663-135</id>
+	</10>
+	<11>
+		<key>89</key>
+		<name>Joaquín Araya Espinoza</name>
+		<code>ILA</code>
+		<id>ILA-352-317-550</id>
+	</11>
+	<12>
+		<key>88</key>
+		<name>Isaac SanMartín Campos</name>
+		<code>RCE</code>
+		<id>RCE-786-578-990</id>
+	</12>
+	<13>
+		<key>87</key>
+		<name>Sebastián Fernández González</name>
+		<code>ILA</code>
+		<id>ILA-268-327-935</id>
+	</13>
+	<14>
+		<key>86</key>
+		<name>Bruno Torres Aravena</name>
+		<code>ILA</code>
+		<id>ILA-569-688-905</id>
+	</14>
+	<15>
+		<key>85</key>
+		<name>Miranda Palma Donoso</name>
+		<code>ICG</code>
+		<id>ICG-635-746-275</id>
+	</15>
+	<16>
+		<key>84</key>
+		<name>Bautista Muñoz Valdés</name>
+		<code>ICG</code>
+		<id>ICG-381-221-604</id>
+	</16>
+	<17>
+		<key>83</key>
+		<name>Íker García Campos</name>
+		<code>ILA</code>
+		<id>ILA-756-943-953</id>
+	</17>
+	<18>
+		<key>82</key>
+		<name>Amelia Cárdenas López</name>
+		<code>RCE</code>
+		<id>RCE-444-763-190</id>
+	</18>
+	<19>
+		<key>81</key>
+		<name>Dante Molina Reyes</name>
+		<code>ICE</code>
+		<id>ICE-634-344-332</id>
+	</19>
+	<20>
+		<key>80</key>
+		<name>Sebastián Sánchez Espinoza</name>
+		<code>ILA</code>
+		<id>ILA-506-166-815</id>
+	</20>
+	<21>
+		<key>79</key>
+		<name>Abigail Navarrete Gallardo</name>
+		<code>RCG</code>
+		<id>RCG-541-125-254</id>
+	</21>
+	<22>
+		<key>78</key>
+		<name>David Vera Navarro</name>
+		<code>ICE</code>
+		<id>ICE-408-108-418</id>
+	</22>
+	<23>
+		<key>77</key>
+		<name>Dylan Vargas Morales</name>
+		<code>RCG</code>
+		<id>RCG-359-211-286</id>
+	</23>
+	<24>
+		<key>76</key>
+		<name>Samantha Flores Ruiz</name>
+		<code>ICE</code>
+		<id>ICE-315-988-668</id>
+	</24>
+	<25>
+		<key>75</key>
+		<name>Regina Araya Jara</name>
+		<code>RCG</code>
+		<id>RCG-582-361-421</id>
+	</25>
+	<26>
+		<key>74</key>
+		<name>María José Poblete Godoy</name>
+		<code>ILA</code>
+		<id>ILA-248-861-582</id>
+	</26>
+	<27>
+		<key>73</key>
+		<name>Camila Rivera Rodríguez</name>
+		<code>ILA</code>
+		<id>ILA-538-926-679</id>
+	</27>
+	<28>
+		<key>72</key>
+		<name>Isabella Molina Guerrero</name>
+		<code>RCG</code>
+		<id>RCG-545-678-417</id>
+	</28>
+	<29>
+		<key>71</key>
+		<name>Matías Hernández Álvarez</name>
+		<code>RCG</code>
+		<id>RCG-295-186-123</id>
+	</29>
+	<30>
+		<key>70</key>
+		<name>Sofía Vidal Bravo</name>
+		<code>ICE</code>
+		<id>ICE-310-728-971</id>
+	</30>
+	<31>
+		<key>69</key>
+		<name>Emma Pizarro Sáez</name>
+		<code>ICG</code>
+		<id>ICG-405-160-214</id>
+	</31>
+	<32>
+		<key>68</key>
+		<name>Antonella López Escobar</name>
+		<code>ICG</code>
+		<id>ICG-772-918-685</id>
+	</32>
+	<33>
+		<key>67</key>
+		<name>Mariana Paredes Sáez</name>
+		<code>ICE</code>
+		<id>ICE-175-709-805</id>
+	</33>
+	<34>
+		<key>66</key>
+		<name>Erick Gutiérrez Contreras</name>
+		<code>ICG</code>
+		<id>ICG-469-547-713</id>
+	</34>
+	<35>
+		<key>65</key>
+		<name>Matías Rojas Reyes</name>
+		<code>RCG</code>
+		<id>RCG-868-567-826</id>
+	</35>
+	<36>
+		<key>64</key>
+		<name>Ximena Rojas Molina</name>
+		<code>ILA</code>
+		<id>ILA-902-345-978</id>
+	</36>
+	<37>
+		<key>63</key>
+		<name>Emilia Medina Garrido</name>
+		<code>ICE</code>
+		<id>ICE-558-162-485</id>
+	</37>
+	<38>
+		<key>62</key>
+		<name>Nicolás Vidal Gallardo</name>
+		<code>RCE</code>
+		<id>RCE-191-143-885</id>
+	</38>
+	<39>
+		<key>61</key>
+		<name>Bautista Flores Saavedra</name>
+		<code>RCG</code>
+		<id>RCG-840-678-479</id>
+	</39>
+	<40>
+		<key>60</key>
+		<name>Amanda Toro Vera</name>
+		<code>RCE</code>
+		<id>RCE-138-670-527</id>
+	</40>
+	<41>
+		<key>59</key>
+		<name>Isaac Sandoval Navarrete</name>
+		<code>RCE</code>
+		<id>RCE-816-499-197</id>
+	</41>
+	<42>
+		<key>58</key>
+		<name>María Maldonado Medina</name>
+		<code>RCE</code>
+		<id>RCE-698-981-985</id>
+	</42>
+	<43>
+		<key>57</key>
+		<name>Nicolás Cárdenas Soto</name>
+		<code>RCG</code>
+		<id>RCG-272-944-449</id>
+	</43>
+	<44>
+		<key>56</key>
+		<name>Abigail Yáñez Martínez</name>
+		<code>ICG</code>
+		<id>ICG-920-570-546</id>
+	</44>
+	<45>
+		<key>55</key>
+		<name>Ariana Vergara Flores</name>
+		<code>ICE</code>
+		<id>ICE-348-501-303</id>
+	</45>
+	<46>
+		<key>54</key>
+		<name>Valentino Sáez Palma</name>
+		<code>RCG</code>
+		<id>RCG-337-219-551</id>
+	</46>
+	<47>
+		<key>53</key>
+		<name>Hugo Peña Ortega</name>
+		<code>ICE</code>
+		<id>ICE-685-403-856</id>
+	</47>
+	<48>
+		<key>52</key>
+		<name>Abril Navarro Ramírez</name>
+		<code>ICE</code>
+		<id>ICE-641-904-596</id>
+	</48>
+	<49>
+		<key>51</key>
+		<name>Benicio Yáñez Castro</name>
+		<code>ICE</code>
+		<id>ICE-335-742-471</id>
+	</49>
+	<50>
+		<key>50</key>
+		<name>Samantha Cáceres Fernández</name>
+		<code>RCG</code>
+		<id>RCG-953-170-335</id>
+	</50>
+	<51>
+		<key>49</key>
+		<name>Julián Rodríguez Bustamante</name>
+		<code>ICE</code>
+		<id>ICE-275-362-745</id>
+	</51>
+	<52>
+		<key>48</key>
+		<name>Valentina Riquelme Espinoza</name>
+		<code>RCG</code>
+		<id>RCG-429-327-201</id>
+	</52>
+	<53>
+		<key>47</key>
+		<name>Bruno Sánchez Sandoval</name>
+		<code>ILA</code>
+		<id>ILA-964-325-294</id>
+	</53>
+	<54>
+		<key>46</key>
+		<name>Juana Paredes Salazar</name>
+		<code>ILA</code>
+		<id>ILA-935-857-542</id>
+	</54>
+	<55>
+		<key>45</key>
+		<name>Emilio Valdés Jiménez</name>
+		<code>ICG</code>
+		<id>ICG-543-891-873</id>
+	</55>
+	<56>
+		<key>44</key>
+		<name>Felipe Cárdenas Ruiz</name>
+		<code>ICG</code>
+		<id>ICG-229-397-320</id>
+	</56>
+	<57>
+		<key>43</key>
+		<name>Catalina Ortiz Bravo</name>
+		<code>ICG</code>
+		<id>ICG-922-340-119</id>
+	</57>
+	<58>
+		<key>42</key>
+		<name>Leonardo Carrasco Salinas</name>
+		<code>ILA</code>
+		<id>ILA-862-255-925</id>
+	</58>
+	<59>
+		<key>41</key>
+		<name>Erick Sáez Flores</name>
+		<code>RCE</code>
+		<id>RCE-363-251-462</id>
+	</59>
+	<60>
+		<key>40</key>
+		<name>Valentino Pérez Ortiz</name>
+		<code>ICE</code>
+		<id>ICE-543-942-591</id>
+	</60>
+	<61>
+		<key>39</key>
+		<name>Isabella Leiva Vera</name>
+		<code>ICG</code>
+		<id>ICG-384-966-463</id>
+	</61>
+	<62>
+		<key>38</key>
+		<name>Gabriel Cortés Maldonado</name>
+		<code>ICG</code>
+		<id>ICG-337-935-680</id>
+	</62>
+	<63>
+		<key>37</key>
+		<name>María Maldonado Hernández</name>
+		<code>RCE</code>
+		<id>RCE-859-241-397</id>
+	</63>
+	<64>
+		<key>36</key>
+		<name>Rodrigo Pizarro Tapia</name>
+		<code>ICE</code>
+		<id>ICE-249-728-683</id>
+	</64>
+	<65>
+		<key>35</key>
+		<name>Dante Sáez Campos</name>
+		<code>RCG</code>
+		<id>RCG-719-379-859</id>
+	</65>
+	<66>
+		<key>34</key>
+		<name>Chloe Paredes Peña</name>
+		<code>ILA</code>
+		<id>ILA-426-642-892</id>
+	</66>
+	<67>
+		<key>33</key>
+		<name>Samantha Cortés Lagos</name>
+		<code>ICE</code>
+		<id>ICE-503-240-577</id>
+	</67>
+	<68>
+		<key>32</key>
+		<name>Emilio González Cárdenas</name>
+		<code>ICG</code>
+		<id>ICG-459-989-272</id>
+	</68>
+	<69>
+		<key>31</key>
+		<name>Zoe Guzmán Yáñez</name>
+		<code>RCG</code>
+		<id>RCG-504-403-127</id>
+	</69>
+	<70>
+		<key>30</key>
+		<name>Alejandra Alvarado Navarrete</name>
+		<code>RCG</code>
+		<id>RCG-441-260-376</id>
+	</70>
+	<71>
+		<key>29</key>
+		<name>Mariana Molina Peña</name>
+		<code>ICG</code>
+		<id>ICG-299-198-827</id>
+	</71>
+	<72>
+		<key>28</key>
+		<name>Vicente Pizarro López</name>
+		<code>RCG</code>
+		<id>RCG-592-374-617</id>
+	</72>
+	<73>
+		<key>27</key>
+		<name>Mariana Zúñiga Silva</name>
+		<code>ICG</code>
+		<id>ICG-865-300-769</id>
+	</73>
+	<74>
+		<key>26</key>
+		<name>Camila Henríquez Salinas</name>
+		<code>RCE</code>
+		<id>RCE-923-747-905</id>
+	</74>
+	<75>
+		<key>25</key>
+		<name>Dante Navarrete Farías</name>
+		<code>ILA</code>
+		<id>ILA-565-880-836</id>
+	</75>
+	<76>
+		<key>24</key>
+		<name>David Gallardo Cortés</name>
+		<code>RCG</code>
+		<id>RCG-489-471-599</id>
+	</76>
+	<77>
+		<key>23</key>
+		<name>Bautista Maldonado Medina</name>
+		<code>ICG</code>
+		<id>ICG-838-681-887</id>
+	</77>
+	<78>
+		<key>22</key>
+		<name>Luciana Navarrete Palma</name>
+		<code>RCE</code>
+		<id>RCE-309-454-523</id>
+	</78>
+	<79>
+		<key>21</key>
+		<name>Isaac Romero Fuentes</name>
+		<code>ILA</code>
+		<id>ILA-874-162-107</id>
+	</79>
+	<80>
+		<key>20</key>
+		<name>Matías Donoso Navarro</name>
+		<code>ICG</code>
+		<id>ICG-814-733-897</id>
+	</80>
+	<81>
+		<key>19</key>
+		<name>Mateo Álvarez Álvarez</name>
+		<code>ILA</code>
+		<id>ILA-953-272-113</id>
+	</81>
+	<82>
+		<key>18</key>
+		<name>Lucía Contreras Vega</name>
+		<code>RCE</code>
+		<id>RCE-623-503-328</id>
+	</82>
+	<83>
+		<key>17</key>
+		<name>Abril SanMartín Fernández</name>
+		<code>ICG</code>
+		<id>ICG-588-546-588</id>
+	</83>
+	<84>
+		<key>16</key>
+		<name>Maximiliano Moreno Martínez</name>
+		<code>ICG</code>
+		<id>ICG-215-329-686</id>
+	</84>
+	<85>
+		<key>15</key>
+		<name>Emmanuel Aguilera Fuentes</name>
+		<code>RCG</code>
+		<id>RCG-682-565-533</id>
+	</85>
+	<86>
+		<key>14</key>
+		<name>Liam Araya Toro</name>
+		<code>ICE</code>
+		<id>ICE-182-930-587</id>
+	</86>
+	<87>
+		<key>13</key>
+		<name>Lorenzo Sáez Vidal</name>
+		<code>RCE</code>
+		<id>RCE-733-652-688</id>
+	</87>
+	<88>
+		<key>12</key>
+		<name>Lola Bravo Castro</name>
+		<code>ICG</code>
+		<id>ICG-429-893-108</id>
+	</88>
+	<89>
+		<key>11</key>
+		<name>Mía Espinoza Aguilera</name>
+		<code>ILA</code>
+		<id>ILA-331-934-729</id>
+	</89>
+	<90>
+		<key>10</key>
+		<name>Paula Torres Guzmán</name>
+		<code>RCG</code>
+		<id>RCG-899-304-175</id>
+	</90>
+	<91>
+		<key>9</key>
+		<name>Francesca Gutiérrez Lagos</name>
+		<code>ICE</code>
+		<id>ICE-270-678-173</id>
+	</91>
+	<92>
+		<key>8</key>
+		<name>Gabriel Gómez Saavedra</name>
+		<code>RCG</code>
+		<id>RCG-575-386-912</id>
+	</92>
+	<93>
+		<key>7</key>
+		<name>Gabriela Soto Venegas</name>
+		<code>RCE</code>
+		<id>RCE-718-435-723</id>
+	</93>
+	<94>
+		<key>6</key>
+		<name>Olivia Navarro Yáñez</name>
+		<code>ILA</code>
+		<id>ILA-476-739-208</id>
+	</94>
+	<95>
+		<key>5</key>
+		<name>Aitana Pino Carvajal</name>
+		<code>RCE</code>
+		<id>RCE-225-815-405</id>
+	</95>
+	<96>
+		<key>4</key>
+		<name>Emilio Jiménez Guerrero</name>
+		<code>ICG</code>
+		<id>ICG-749-260-701</id>
+	</96>
+	<97>
+		<key>3</key>
+		<name>Miranda Campos Romero</name>
+		<code>RCE</code>
+		<id>RCE-229-251-409</id>
+	</97>
+	<98>
+		<key>2</key>
+		<name>Francisco Sáez Ramírez</name>
+		<code>RCG</code>
+		<id>RCG-468-979-217</id>
+	</98>
+	<99>
+		<key>1</key>
+		<name>Dante Romero Guzmán</name>
+		<code>RCE</code>
+		<id>RCE-150-417-437</id>
+	</99>
+</root>

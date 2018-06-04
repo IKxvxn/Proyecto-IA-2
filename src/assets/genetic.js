@@ -28,15 +28,13 @@ export function genetic(Agents, Orders, NGenerations, PopulationSize)
         
         TopFitnessValue = ExtractTopFitnessIndividuals(Population, 1)[0].Fitness
         // console.log("Fitness de la iteracion -> " + TopFitnessValue)
-        // // console.log(ExtractTopFitnessIndividuals(Population, 1))
 
         NGenerations -= 1        
     }
     console.log('<<<<<<<<<<<<<<<- Poblacion Generada ->>>>>>>>>>>>>>>')
     //console.log(Population[0])
-
-    console.log(ExtractIndividualsData(ExtractTopFitnessIndividuals(Population, 1)[0]))
-    return Population
+    
+    return Population[0]
 }
 
 // ----------------------------------------------------------------------------------------------------------

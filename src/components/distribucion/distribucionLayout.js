@@ -26,12 +26,15 @@ render() {
           actualizarFiltro={this.props.actualizarFiltro} 
           value={this.props.estadoDistribucion.filtro} 
           handleButtonAction={this.props.calcularDistribucion}
+          ordenes={this.props.ordenes}
+          agentes={this.props.agentes}
         />
         <Table  
           style={{marginBottom:"-2rem"}} 
           columns={Columnas.distribucionColumns}
           dataSource={this.props.estadoDistribucion.filtro===""?this.props.estadoDistribucion.data:busqueda.search(this.props.estadoDistribucion.filtro)} 
-          size="small"  
+          size="small"
+          loading={this.props.estadoDistribucion.loading}  
           pagination={{ pageSize: this.props.estadoDistribucion.pageSize, current:this.props.estadoDistribucion.currentPage, onChange:(page)=>this.props.actualizarPage(page) }}  
           scroll={{ x: '900px',y:"66.5vh"}}
           expandedRowKeys = {this.props.estadoDistribucion.expandedRowKeys}
@@ -45,12 +48,14 @@ render() {
 function mapStateToProps(state) {
   return {
     estadoDistribucion: state.distribucionReducer,
+    agentes: state.agentesReducer.data,
+    ordenes: state.ordenesReducer.data,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    calcularDistribucion: ()  => dispatch(distribucionActions.calcularDistribucion()),
+    calcularDistribucion: (agentes,ordenes)  => dispatch(distribucionActions.calcularDistribucion(agentes,ordenes)),
     actualizarFiltro: (filtro)  => dispatch(distribucionActions.actualizarFiltro(filtro)),
     actualizarPage: (page)  => dispatch(distribucionActions.actualizarPage(page)),
     addExpanded: (row) => dispatch(distribucionActions.addExpanded(row)),

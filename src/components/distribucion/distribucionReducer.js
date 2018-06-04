@@ -23,12 +23,6 @@ const distribucionReducer = (state = DEFAULT_STATE, action) => {
                 loading: false,
                 data: action.data,
             }
-        case Acciones.CARGAR_DISTRIBUCION_FAILURE:
-            return {
-                ...state,
-                loading: false,
-                data: action.data[0],
-            }
         case Acciones.CHANGE_FILTRO_DISTRIBUCION:
             return {
                 ...state,

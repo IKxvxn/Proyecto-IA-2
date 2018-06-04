@@ -3,20 +3,29 @@ import * as Generador from "../../assets/generator"
 import * as Analysis from "../../assets/dataAnalysis"
 import * as Algorithm from "../../assets/genetic"
 
-export function calcularDistribucion(){ 
+export function calcularDistribucion(agentes, ordenes){ 
 
     var PopulationSize = 10
-    var NAgents = 100
-    var NOrders = 600
     var NGenerations = 100
-    Algorithm.genetic(Generador.generarAgentes(NAgents), Generador.generarOrdenes(NOrders), NGenerations, PopulationSize)
+    
     return function (dispatch) { 
+        if(agentes.length===0 ||ordenes.length===0){dispatch({type:Acciones.CARGAR_DISTRIBUCION_FAILURE}); return}
+
         dispatch({ 
           type: Acciones.CARGAR_DISTRIBUCION_REQUEST 
         }) 
+        
+        var distribucion = Algorithm.genetic(agentes, ordenes, NGenerations, PopulationSize)
+        var result = []
+        for(var i in distribucion){
+            distribucion[i].Agent.key=i
+            distribucion[i].Agent.ordenes=distribucion[i].Orders
+            result.push(distribucion[i].Agent)
+        }
+
         dispatch({ 
             type: Acciones.CARGAR_DISTRIBUCION_SUCCESS, 
-             data: Generador.generarAgentes(50).map((field)=>{field.ordenes=Generador.generarOrdenes(Math.floor(Math.random() * (5 - 1) + 1));return field})
+             data: result
             //data:  Algorithm.genetic(Generador.generarAgentes(NAgents), Generador.generarOrdenes(NOrders), NGenerations, PopulationSize)
         }) 
 }}

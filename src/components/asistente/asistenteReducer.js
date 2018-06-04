@@ -61,6 +61,10 @@ const asistenteReducer = (state = DEFAULT_STATE, action) => {
                 estadoErrorModal:true,
                 errors:action.data[1]
             }
+        case Acciones.CARGAR_DISTRIBUCION_FAILURE:
+            if(state.estadoAsistente===true){Speech.Speech(Speech.DistError)}
+            else if(state.estadoNotificaciones===true){message.error(Speech.DistError[0])}
+            return state
         case Acciones.HIDE_ERROR_MODAL:
             return{
                 ...state,
