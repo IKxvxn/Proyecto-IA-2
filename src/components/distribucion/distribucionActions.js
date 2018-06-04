@@ -4,14 +4,20 @@ import * as Analysis from "../../assets/dataAnalysis"
 import * as Algorithm from "../../assets/genetic"
 
 export function calcularDistribucion(){ 
-    Algorithm.genetic(Generador.generarAgentes(10), Generador.generarOrdenes(30))
+
+    var PopulationSize = 200
+    var NAgents = 2000
+    var NOrders = 500
+    var NGenerations = 1000
+    Algorithm.genetic(Generador.generarAgentes(NAgents), Generador.generarOrdenes(NOrders), NGenerations, PopulationSize)
     return function (dispatch) { 
         dispatch({ 
           type: Acciones.CARGAR_DISTRIBUCION_REQUEST 
         }) 
         dispatch({ 
             type: Acciones.CARGAR_DISTRIBUCION_SUCCESS, 
-            data: Generador.generarAgentes(50).map((field)=>{field.ordenes=Generador.generarOrdenes(Math.floor(Math.random() * (5 - 1) + 1));return field})
+             data: Generador.generarAgentes(50).map((field)=>{field.ordenes=Generador.generarOrdenes(Math.floor(Math.random() * (5 - 1) + 1));return field})
+            //data:  Algorithm.genetic(Generador.generarAgentes(NAgents), Generador.generarOrdenes(NOrders), NGenerations, PopulationSize)
         }) 
 }}
 export const actualizarFiltro = (filtro) => ({
